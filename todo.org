@@ -1,0 +1,11 @@
+* 
+* make contrast modes like gruvbox but much heavier, fading fg saturation
+  massively rather than just tweaking bg slightly. see screenshot of
+  accidental super-desat:
+./screens_random_ideas/super_desat.png
+
+* hue and contrast as continous slider ranges (1-10 or 1-100 or whatever)
+  rather than shitty lil set values
+
+* function to compute relative colors so can do stuff like fade out text
+  while still keeping coloring
