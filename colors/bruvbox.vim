@@ -1,13 +1,13 @@
 scriptencoding utf-8
 " -----------------------------------------------------------------------------
 " File: colors/bruvbox.vim
-" Description: Faded groove color schenable mobilebackupseme for Vim. Shamelessly forked from Gruvbox. 
+" Description: Faded groove color schenable mobilebackupseme for Vim. Shamelessly forked from Gruvbox.
 " Author: Bruvbox by @tolgraven.    Gruvbox by morhetz <morhetz@gmail.com>
 " Source: https://github.com/tolgraven/bruvbox
 " Last Modified: Apr 2017
 " -----------------------------------------------------------------------------
 " Supporting code -------------------------------------------------------------
-"{{{1         Initialisation: 
+"{{{1         Initialisation:
 hi clear
 if exists('syntax_on')
   syntax reset
@@ -15,7 +15,7 @@ endif
 let g:colors_name='bruvbox'
 if !has('gui_running') && &t_Co != 256  | finish   | endif
 
-"{{{1         Global Settings: 
+"{{{1         Global Settings:
 let g:bruvbox_bold      = get(g:, 'bruvbox_bold',      1)
 let g:bruvbox_undercurl = get(g:, 'bruvbox_undercurl', 1)
 let g:bruvbox_underline = get(g:, 'bruvbox_underline', 1)
@@ -36,127 +36,143 @@ let g:bruvbox_contrast_light       = get(g:, 'bruvbox_contrast_light', 'medium')
 let s:is_dark=(&background ==# 'dark')  " works, but leads to first initing light if bg not set before colorscheme in vimrc
 " let s:is_dark = 1
 
-"{{{1         Palette: 
+"{{{1         Palette:
 let s:bb = {}  " setup palette dictionary
 "{{{        NOTES
 "IDEA: instead of bg/base gray, turn it (so bg, also comments, etc) ever so faintly bluish hue!! could be shit but suspect might be very pretty?
 "PER "start with purely faded gruvbox, before tweaking further":
-"BRUVBOX:	bg				  red 			green 		yellow 		blue 			purple 		aqua 			gray 		
-"normal 	#393939 	#a4ad49 	#939233 	#c6943a 	#4d8487 	#a56784 	#6b976e 					
-"bright 						    #cb5d4e 	#aaae4a 	#d8ac67 	#829d93 	#c38495 	#8bb47d 					
+"BRUVBOX:	bg				  red 			green 		yellow 		blue 			purple 		aqua 			gray
+"normal 	#393939 	#a4ad49 	#939233 	#c6943a 	#4d8487 	#a56784 	#6b976e
+"bright 						    #cb5d4e 	#aaae4a 	#d8ac67 	#829d93 	#c38495 	#8bb47d
 "    				bg0_h			  bg0 			bg1 			bg2 			bg3 			bg4 			gray 			orange
 "bg 	  		#1d2821  	#282828 	#3c3836 	#505945 	#665c54 	#7c6f64 	#928374 	#c5632c
 "fg 					#32302f 	 #a89984 	#bdae93 	#d5c4a1 	#ebdbb2 	#fbf1c7 	#d68035
- 
-"GRUVBOX: bg				red 			green 		yellow 		blue 			purple 		aqua 			gray 		
+
+"GRUVBOX: bg				red 			green 		yellow 		blue 			purple 		aqua 			gray
 "normal 	#282828 	#cc241d 	#b8bb26
-"bright 		
+"bright
 " 				bg0_h			bg0 			bg1 			bg2 			bg3 			bg4 			gray 			orange
 "bg 			#1d2821  	#282828 	#3c3836 	#505945 	#665c54 	#7c6f64 	#928374 	#d68035d0e
 "fg 								#32302f 	#a89984 	#bdae93 	#d5c4a1 	#ebdbb2 	#fbf1c7 	#fe8019
 "}}}
 " {{{2         DARK / LIGHT
-let s:bb.black       = ['#181919', 233]     "the darkest we dare go... 233 is about ot on
+let s:bb.black       = ['#161515', 233]     "
+let s:bb.black2      = ['#181716', 233]     "
 
-let s:bb.dark0_hard  = ['#212223', 234]     " 
-let s:bb.dark0_hard2 = ['#232526', 234]     " 
-let s:bb.dark0       = ['#272828', 235]     " 282828 is orig gb dark0
-let s:bb.dark0_medium= ['#2b2c2e', 236]     " 
-let s:bb.dark0_soft  = ['#303133', 236]     " 
+" need more variants down here lol.
+let s:bb.dark0_hard  = ['#181717', 234]     "
+let s:bb.dark0_hard2 = ['#212120', 234]     "
+let s:bb.dark0       = ['#262525', 235]     " 282828 is orig gb dark0
+let s:bb.dark0_medium= ['#2a292b', 236]     "
+let s:bb.dark0_soft  = ['#2d3030', 236]     "
 
-let s:bb.dark1_hard  = ['#37373a', 237]     " 
-let s:bb.dark1       = ['#3c393c', 237]     " 
-let s:bb.dark1_soft  = ['#3f4040', 238]     " 
+let s:bb.dark1_hard  = ['#34363a', 237]     "
+let s:bb.dark1       = ['#3a393d', 237]     "
+let s:bb.dark1_soft  = ['#3d3f42', 238]     "
+let s:bb.dark2_hard  = ['#42464c', 239]     "
+let s:bb.dark2       = ['#46494c', 239]     "
+let s:bb.dark2_soft  = ['#515458', 240]     "
+let s:bb.dark3       = ['#605c57', 241]     "
+let s:bb.dark4       = ['#7a6f69', 243]     "
 
-let s:bb.dark2_hard  = ['#4c4643', 239]     " 
-let s:bb.dark2       = ['#504945', 239]     " 80-73-69
-let s:bb.dark2_soft  = ['#575452', 240]     " 
-
-let s:bb.dark3       = ['#665c54', 241]     " 102-92-84
-let s:bb.dark4       = ['#7c6f64', 243]     " 124-111-100
-let s:bb.dark4_256   = ['#7c6f64', 243]     " 124-111-100
-
-let s:bb.gray_244    = ['#928374', 244]     " 146-131-116
-let s:bb.gray_245    = ['#90868a', 245]     " 146-131-116
-let s:bb.gray_248    = ['#8a8e8f', 248]     " 146-131-116
+let s:bb.dark4_256   = ['#7c6f64', 243]     "
+let s:bb.gray_244    = ['#908682', 244]     "
+let s:bb.gray_245    = ['#90868a', 245]     "
+let s:bb.gray_248    = ['#8a8e8f', 248]     "
 
 
-let s:bb.white       = ['#fdfbe8', 255]     
+let s:bb.white       = ['#fdfbe8', 255]
 
-let s:bb.light0_hard2= ['#faf8e0', 255]     " 
-let s:bb.light0_hard = ['#f9f5d7', 255]     " 249-245-215
-let s:bb.light0      = ['#fbf1c7', 254]     " 253-244-193
-let s:bb.light0_medium=['#f8e8bf', 253]     " 242-229-188
-let s:bb.light0_soft = ['#f0e3ba', 253]     " 242-229-188
+let s:bb.light0_hard2= ['#faf8e0', 255]     "
+let s:bb.light0_hard = ['#f9f1d9', 255]     "
+let s:bb.light0      = ['#faecc9', 254]     "
+let s:bb.light0_medium=['#f8e8bf', 253]     "
+let s:bb.light0_soft = ['#f0e3ba', 253]     "
 
-let s:bb.light1_hard = ['#efddb5', 252]     " 235-219-178
-let s:bb.light1      = ['#ebdbb2', 252]     " 235-219-178
-let s:bb.light1_soft = ['#e4d5a9', 252]     " 235-219-178
-let s:bb.light2_hard = ['#dccca9', 250]     " 213-196-161
-let s:bb.light2      = ['#d5c4a1', 250]     " 213-196-161
-let s:bb.light2_soft = ['#c5c09a', 250]     " 213-196-161
-let s:bb.light3      = ['#bdae93', 248]     " 189-174-147
-let s:bb.light4      = ['#a89984', 246]     " 168-153-132
-let s:bb.light4_256  = ['#a89984', 246]     " 168-153-132
-let s:bb.bright_gray = ['#af9f91', 244]     " 
+let s:bb.light1_hard = ['#efddb5', 252]     "
+let s:bb.light1      = ['#ebdbb2', 252]     "
+let s:bb.light1_soft = ['#e4d5a9', 252]     "
+let s:bb.light2_hard = ['#dccca9', 250]     "
+let s:bb.light2      = ['#d5c4a1', 250]     "
+let s:bb.light2_soft = ['#c6bc9b', 250]     "
+let s:bb.light3      = ['#bdae93', 248]     "
+let s:bb.light4      = ['#a89984', 246]     "
+
+let s:bb.light4_256  = ['#a89984', 246]     "
+let s:bb.bright_gray = ['#af9f91', 244]     "
 "}}}
 " XXX instead of contrast hi/mid/low have 1-50-100 scale for saturation and contrast! calc bounds and math around
-let s:bb.bright_red       = ['#c55d4e', 167]     " #a4ad49 aint rea lol... errorrr.  #d33a27 or so is gruv orig
-let s:bb.bright_green     = ['#a0a172', 142]     " tweaking off special=#8b8c63... old #919535
-let s:bb.bright_yellow    = ['#d0af60', 214]     "  #c2923a
-let s:bb.bright_blue      = ['#528895', 109]     " 109 = #7c9a9a. srbb says #83a598 for regular ble sign
-let s:bb.bright_blue_alt  = ['#6995b6', 109]     " 
-let s:bb.bright_purple    = ['#a58a99', 175]     " #b2a5ce in iterm palette  #B78AA2 fish
-" let s:bb.bright_aqua      = ['#6f9e85', 108]     " off #6f9879 . 108 = 7c9a7b. too similar. #749783 what I get for orig.
-let s:bb.bright_aqua      = ['#6e916e', 108]     " off #6f9879 . 108 = 7c9a7b. too similar. #749783 what I get for orig.
-let s:bb.bright_orange    = ['#ca782b', 208]     " getting close to perfect after further fade
+" let s:bb.bright_red       = ['#c55d4e', 167]     " #a4ad49 aint rea lol... errorrr.  #d33a27 or so is gruv orig
+" let s:bb.bright_red       = ['#CD6D5F', 167]
+" let s:bb.bright_red       = ['#d17669', 167]
+let s:bb.bright_red       = ['#d18479', 167]  
+" let s:bb.bright_green     = ['#a0a172', 142]
+let s:bb.bright_green     = ['#b4b88d', 142]  
+let s:bb.bright_yellow    = ['#dabd7a', 214]  
+" let s:bb.bright_blue      = ['#528895', 109]
+" let s:bb.bright_blue      = ['#589aa7', 109]
+let s:bb.bright_blue      = ['#7692ab', 109]  
+let s:bb.bright_blue_alt  = ['#6995b6', 109]  
+" let s:bb.bright_purple    = ['#a58a99', 175]
+let s:bb.bright_purple    = ['#bd979d', 175]  
+" let s:bb.bright_aqua      = ['#6e916e', 108]
+let s:bb.bright_aqua      = ['#91b8a4', 108]  
+let s:bb.bright_orange    = ['#cca687', 208]  
 
-let s:bb.neutral_red      = ['#c7271f', 124]     " 204-36-29
-let s:bb.neutral_green    = ['#919535', 106]     " #98971a 152-151-26
-let s:bb.neutral_yellow   = ['#d79921', 172]     " 215-153-33
-let s:bb.neutral_blue     = ['#458588', 66]      " but old one 4d8487 might actually look nicer as bg statusline... hmm
-let s:bb.neutral_blue_alt = ['#4d8487', 66]      " test
-let s:bb.neutral_purple   = ['#a06782', 132]     " 177-98-134
-let s:bb.neutral_aqua     = ['#60906a', 72]      " 104-157-106
-let s:bb.neutral_orange   = ['#c15d1e', 166]     " 214-93-14
+let s:bb.neutral_red      = ['#d76b69', 124] "
+let s:bb.neutral_green    = ['#919545', 106] "
+let s:bb.neutral_yellow   = ['#d9a961', 172] "
+let s:bb.neutral_blue     = ['#458588', 66]  "
+let s:bb.neutral_blue_alt = ['#4d8487', 66]  "
+let s:bb.neutral_purple   = ['#a38392', 132] "
+let s:bb.neutral_aqua     = ['#70907a', 72]  "
+let s:bb.neutral_orange   = ['#d2886d', 166] "
 " used for light mode, repurpose:
-let s:bb.faded_red        = ['#990607', 88]      " 157-0-6
-let s:bb.faded_green      = ['#79740e', 100]     " 121-116-14
-let s:bb.faded_yellow     = ['#b57614', 136]     " 181-118-20
-let s:bb.faded_blue       = ['#1b6678', 24]      " 7-102-120
-let s:bb.faded_purple     = ['#8a4e7f', 96]      " 143-63-113
-let s:bb.faded_aqua       = ['#407955', 66]      " 66-123-88
-let s:bb.faded_orange     = ['#af4f11', 130]     " 175-58-3
+let s:bb.faded_red        = ['#975250', 88]  "
+let s:bb.faded_green      = ['#79743e', 100] "
+let s:bb.faded_yellow     = ['#957644', 136] "
+let s:bb.faded_blue       = ['#6b768b', 24]  "
+let s:bb.faded_purple     = ['#7f6f7f', 96]  "
+let s:bb.faded_aqua       = ['#3a5853', 66]  "
+let s:bb.faded_orange     = ['#99613c', 130] "
 " bright, desat
-let s:bb.special_red      = ['#af6360', 124]
-let s:bb.special_green    = ['#8b8c63', 10]
-let s:bb.special_yellow   = ['#dabd7a', 11]
-let s:bb.special_blue     = ['#80a0b3', 111] "close enough but doesnt quite match up fully... for folds. #84a8j 
-let s:bb.special_purple   = ['#af8589', 172]
-let s:bb.special_aqua     = ['#9ab499', 172]
-let s:bb.special_orange   = ['#d2845d', 172]
+let s:bb.special_red      = ['#af7370', 124] "
+let s:bb.special_green    = ['#8b8c63', 10]  "
+let s:bb.special_yellow   = ['#d0af80', 11]  "
+let s:bb.special_blue     = ['#80a0b3', 111] "
+let s:bb.special_purple   = ['#af8589', 172] "
+let s:bb.special_aqua     = ['#9ab499', 172] "
+let s:bb.special_orange   = ['#dba184', 172] "
 " very dark colors, only for use as background and with light text (no matter what mode)
-let s:bb.bg_dark_red      = ['#430605', 88]      " 
-let s:bb.bg_dark_green    = ['#233509', 100]     " 
-let s:bb.bg_dark_yellow   = ['#604009', 136]     " 
-let s:bb.bg_dark_blue     = ['#314061', 24]      " 
-let s:bb.bg_dark_purple   = ['#734663', 96]      " 
-let s:bb.bg_dark_aqua     = ['#306346', 66]      " 
-let s:bb.bg_dark_orange   = ['#703009', 130]     " 
+" prob slghtly overkill...
+let s:bb.bg_dark_red      = ['#281913', 88]  "
+let s:bb.bg_dark_green    = ['#1f281c', 100] "
+let s:bb.bg_dark_yellow   = ['#2f2b19', 136] "
+let s:bb.bg_dark_blue     = ['#172533', 24]  "
+let s:bb.bg_dark_purple   = ['#342225', 96]  "
+let s:bb.bg_dark_aqua     = ['#1c2f29', 66]  "
+let s:bb.bg_dark_orange   = ['#3c2d1f', 130] "
+" let s:bb.bg_dark_red      = ['#321513', 88]  "
+" let s:bb.bg_dark_green    = ['#30362a', 100] "
+" let s:bb.bg_dark_yellow   = ['#392f25', 136] "
+" let s:bb.bg_dark_blue     = ['#2c3a52', 24]  "
+" let s:bb.bg_dark_purple   = ['#4c3a3c', 96]  "
+" let s:bb.bg_dark_aqua     = ['#30423b', 66]  "
+" let s:bb.bg_dark_orange   = ['#372512', 130] "
 " super faint tingle of a hue...
-let s:bb.bg_light_red     = ['#e3a19f', 124]
-let s:bb.bg_light_green   = ['#d3d4a8', 10]
-let s:bb.bg_light_yellow  = ['#e9d8b4', 11]
-let s:bb.bg_light_blue    = ['#a6c0cd', 111] "close enough. for folds. #84a8j -s | grep .config/fisherman/ | while read line; cd (string split ':' $line)[2]; and j -d 100; endcd working from
-let s:bb.bg_light_purple  = ['#d9b7b7', 172]
-let s:bb.bg_light_aqua    = ['#B6D1B4', 172]
-let s:bb.bg_light_orange  = ['#ddbdaf', 172]
+let s:bb.bg_light_red     = ['#ea9a98', 124]  
+let s:bb.bg_light_green   = ['#ccdaa8', 10]   
+let s:bb.bg_light_yellow  = ['#d9c894', 11]   
+let s:bb.bg_light_blue    = ['#a6c0cd', 111]  
+let s:bb.bg_light_purple  = ['#d9b7b7', 172]  
+let s:bb.bg_light_aqua    = ['#B6D1B4', 172]  
+let s:bb.bg_light_orange  = ['#d9a58a', 172]  
 " more color talk  #86AB89 gre #AEC0A1 vlight gr / turqu   {{{
 " so the eerily spot on accidental colors were:
 " #84825A light(?) gree   nice desat... maybe fade a tiny bit more and will be nice for strings
 " #D7875F really good creamy orangey
 " #AF8786 faded purp - tho think that one's defined like that? - nope gruvbox is #a76783
-" #D7AF60 Seems almost perfect. faded yello - or is it the same as gruvbox? - 
+" #D7AF60 Seems almost perfect. faded yello - or is it the same as gruvbox? -
 " so bright is for dark bg, faded for light But we should use all groups, whatever mode, for inverted text etc....
 "
 " gruvbox 256 ble vs aqu bug: super close colors. Ble already has lots of gree in it but theyre not remotely this close...
@@ -164,9 +180,9 @@ let s:bb.bg_light_orange  = ['#ddbdaf', 172]
 " #799ca1 my tmux statusline
 
 " #7b9ec3 bubblegum airline insert
-" #536E97 dark blu.fish #2C3B8A other values depending on where in antialiasing looking... 
+" #536E97 dark blu.fish #2C3B8A other values depending on where in antialiasing looking...
 " #5579E3
-" #314061 nice deep dark blu #49838D nice medium ble  #ACCFBD turquois / lightlight ble: 
+" #314061 nice deep dark blu #49838D nice medium ble  #ACCFBD turquois / lightlight ble:
 " #5f8787 gruvboxes basic I guess...
 " #6D7833 #7f9d4a   green candidates
 " Green looks nice but doesnt contrast enough with comments. Maybe Need a bit more brightness in the color, but def not more saturation.
@@ -177,79 +193,81 @@ let s:bb.bg_light_orange  = ['#ddbdaf', 172]
 
 
 "{{{1         Glyphs:
-let s:bb.glyph_arrow_opened_fill    ='▾'    "for nerdtree, tagbar and similar
-let s:bb.glyph_arrow_closed_fill    ='▸'
-let s:bb.glyph_arrow_opened_lined   =''
-let s:bb.glyph_arrow_closed_lined   =''
-let s:bb.glyph_arrow_dense          ='➧'    "any point to these?
-let s:bb.glyph_arrow_heavy          ='➨'
-let s:bb.glyph_pipe                 ='│'
-let s:bb.glyph_pinned               =''    "font awesome? for taboo, renamed tabs
-let s:bb.glyph_branch               =''
-let s:bb.glyph_warning              =''
-let s:bb.glyph_error                =''
-let s:bb.glyph_modified             ='◈'
-let s:bb.glyph_linenr               =''
-let s:bb.glyph_whitespace           ='☲'
-let s:bb.glyph_paste                ='ρ'       "curr 'PASTE'
-let s:bb.glyph_spell                ='Ꞩ'       " 'SPELL'
+let s:bb.glyph={}
+let s:bb.glyph.arrow_opened_fill    ='▾'    "for nerdtree, tagbar and similar
+let s:bb.glyph.arrow_closed_fill    ='▸'
+let s:bb.glyph.arrow_opened_lined   =''
+let s:bb.glyph.arrow_closed_lined   =' '   "''
+let s:bb.glyph.arrow_dense          ='➧'    "any point to these?
+let s:bb.glyph.arrow_heavy          ='➨'
+let s:bb.glyph.pipe                 ='│'
+let s:bb.glyph.pinned               =''    "font awesome? for taboo, renamed tabs
+let s:bb.glyph.branch               =''
+let s:bb.glyph.warning              =''
+let s:bb.glyph.error                =''
+let s:bb.glyph.modified             ='◈'
+let s:bb.glyph.linenr               =''
+let s:bb.glyph.whitespace           ='☲'
+let s:bb.glyph.paste                ='ρ'       "curr 'PASTE'
+let s:bb.glyph.spell                ='Ꞩ'       " 'SPELL'
 
-let s:bb.glyph_recycle              =''
-let s:bb.glyph_again                ='↺'
-let s:bb.glyph_back                 ='⤸'
-let s:bb.glyph_arrow_circled        ='➲'
+let s:bb.glyph.recycle              =' '
+let s:bb.glyph.again                ='↺'
+let s:bb.glyph.back                 ='⤸'
+let s:bb.glyph.arrow_circled        ='➲'
 
-let s:bb.glyph_vim                  =''
-let s:bb.glyph_file                 =''
+let s:bb.glyph.vim                  =''
+let s:bb.glyph.file                 =''
 
-let s:bb.glyph_separator_arrow_fill          =''
-let s:bb.glyph_separator_arrow_fill_back     =''
-let s:bb.glyph_separator_triangle_left_above =''
-let s:bb.glyph_separator_triangle_left_below =''
-let s:bb.glyph_separator_triangle_right_above=''
-let s:bb.glyph_separator_triangle_right_below=''
-let s:bb.glyph_separator_slash               =''
-let s:bb.glyph_separator_slash_back          =''
-let s:bb.glyph_separator_arrow_lined         =''
-let s:bb.glyph_separator_arrow_lined_back    =''
+let s:bb.glyph.separator_arrow_fill          =''
+let s:bb.glyph.separator_arrow_fill_back     =''
+let s:bb.glyph.separator_triangle_left_above =''
+let s:bb.glyph.separator_triangle_left_below =''
+let s:bb.glyph.separator_triangle_right_above=''
+let s:bb.glyph.separator_triangle_right_below=''
+let s:bb.glyph.separator_slash               =''
+let s:bb.glyph.separator_slash_back          =''
+let s:bb.glyph.separator_arrow_lined         =''
+let s:bb.glyph.separator_arrow_lined_back    =''
 
-" let g:airline_left_sep 														=''    "  vs ⮀ ''  
+" let g:airline_left_sep 														=''    "  vs ⮀ ''
 " let g:airline_left_alt_sep 												=' '    "'│' 	
-" let g:airline_right_sep 													=''     "''  
+" let g:airline_right_sep 													=''     "''
 " let g:airline_right_alt_sep 											=''     "'│'
 
 
 " signs:
-let s:bb.glyph_sign_added           ='✚'
-let s:bb.glyph_sign_changed         ='✹'
-let s:bb.glyph_sign_deleted         =''    "XXX find better
-let s:bb.glyph_sign_changed_deleted =''
-let s:bb.glyph_sign_warning         =s:bb.glyph_warning
-let s:bb.glyph_sign_error           =s:bb.glyph_error
+let s:bb.glyph.sign_added           ='✚'
+let s:bb.glyph.sign_changed         ='✹'
+let s:bb.glyph.sign_deleted         =''    "XXX find better
+let s:bb.glyph.sign_changed_deleted =''  "is weird on kitty
+let s:bb.glyph.sign_warning         =s:bb.glyph.warning
+let s:bb.glyph.sign_error           =s:bb.glyph.error
 
-let s:bb.glyph_type_buffer          =''    " ℬ  b B
-let s:bb.glyph_type_tab             =''    "no but srsly find something usable
-" let s:bb.glyph_type_window          =''
-let s:bb.glyph_type_terminal        =''
+let s:bb.glyph.type_buffer          =''    " ℬ  b B
+let s:bb.glyph.type_tab             =''    "no but srsly find something usable
+" let s:bb.glyph.type_window          =''
+let s:bb.glyph.type_terminal        =''
 
-let s:bb.glyph_mode_normal          ='N'
-let s:bb.glyph_mode_insert          =''
-let s:bb.glyph_mode_linewise        =''
-let s:bb.glyph_mode_colwise         ='▢'
+let s:bb.glyph.mode_normal          ='N'
+let s:bb.glyph.mode_insert          =''
+let s:bb.glyph.mode_linewise        =''
+let s:bb.glyph.mode_colwise         ='▢'
 
-let s:bb.glyph_source_buffer        =s:bb.glyph_type_buffer
-let s:bb.glyph_source_around        =''    "''
-let s:bb.glyph_source_web           =''
-let s:bb.glyph_source_vim           =s:bb.glyph_vim
-let s:bb.glyph_source_path          ='./'.s:bb.glyph_file      "''
-let s:bb.glyph_source_omni          =''
-let s:bb.glyph_source_jedi          =''
-let s:bb.glyph_source_tern          =''
-let s:bb.glyph_source_tag           =''
-let s:bb.glyph_source_snippet       =''
-let s:bb.glyph_source_syntax        ='♯'
+let s:bb.glyph.source_buffer        =s:bb.glyph.type_buffer
+let s:bb.glyph.source_around        =''    "''
+let s:bb.glyph.source_web           =''
+let s:bb.glyph.source_vim           =s:bb.glyph.vim
+let s:bb.glyph.source_path          ='./'.s:bb.glyph.file      "''
+let s:bb.glyph.source_omni          =''
+let s:bb.glyph.source_jedi          =''
+let s:bb.glyph.source_tern          =''
+let s:bb.glyph.source_tag           =''
+let s:bb.glyph.source_snippet       =''
+let s:bb.glyph.source_syntax        ='♯'
 
-
+let g:bruvbox_glyph     = s:bb.glyph
+let g:bruvbox_internal  = s:bb
 
 "{{{1         Setup Recommended Glyphs:
 " if s:bruvbox_use_recommended_glyphs
@@ -263,13 +281,14 @@ let s:bb.glyph_source_syntax        ='♯'
 " let g:taboo_renamed_tab_format      =' %l%m'
 
 
-"{{{1         Setup Emphasis: 
+"{{{1         Setup Emphasis:
 let s:bold      = (g:bruvbox_bold      ? 'bold,'      : '')
 let s:italic    = (g:bruvbox_italic    ? 'italic,'    : '')
 let s:underline = (g:bruvbox_underline ? 'underline,' : '')
 let s:undercurl = (g:bruvbox_undercurl ? 'undercurl,' : '')
 let s:inverse   = (g:bruvbox_inverse   ? 'inverse,'   : '')
-"{{{1         Setup Colors: 
+" let s:inverse   = (g:bruvbox_inverse   ? 'reverse,'   : '')
+"{{{1         Setup Colors:
 let s:vim_bg = ['bg', 'bg']     | let s:vim_fg = ['fg', 'fg']  | let s:none = ['NONE', 'NONE']
 
 if s:is_dark  " determine relative colors
@@ -279,25 +298,25 @@ if s:is_dark  " determine relative colors
   let s:fg_hard = s:bb.white
 
   let s:bg0_h2 = s:bb.dark0_hard2
-  let s:bg0  = s:bb.dark0 | let s:bg0_s = s:bb.dark0_soft    | let s:bg0_m = s:bb.dark0_medium     | let s:bg0_h  = s:bb.dark0_hard   
-  let s:bg1  = s:bb.dark1 | let s:bg1_s = s:bb.dark1_soft    | let s:bg1_h = s:bb.dark1_hard   
-  let s:bg2  = s:bb.dark2 | let s:bg2_s = s:bb.dark2_soft    | let s:bg2_h = s:bb.dark2_hard   
+  let s:bg0  = s:bb.dark0 | let s:bg0_s = s:bb.dark0_soft    | let s:bg0_m = s:bb.dark0_medium     | let s:bg0_h  = s:bb.dark0_hard
+  let s:bg1  = s:bb.dark1 | let s:bg1_s = s:bb.dark1_soft    | let s:bg1_h = s:bb.dark1_hard
+  let s:bg2  = s:bb.dark2 | let s:bg2_s = s:bb.dark2_soft    | let s:bg2_h = s:bb.dark2_hard
   let s:bg3  = s:bb.dark3 | let s:bg4   = s:bb.dark4
-  
+
   let s:gray = s:bb.gray_244 | let s:gray2 = s:bb.gray_248
 
   let s:fg0  = s:bb.light0 | let s:fg0_s   = s:bb.light0_soft  | let s:fg0_m = s:bb.light0_medium  | let s:fg0_h = s:bb.light0_hard
-  let s:fg1  = s:bb.light1 | let s:fg1_s = s:bb.light1_soft | let s:fg1_h = s:bb.light1_hard 
-  let s:fg2  = s:bb.light2 | let s:fg2_s = s:bb.light2_soft | let s:fg2_h = s:bb.light2_hard 
+  let s:fg1  = s:bb.light1 | let s:fg1_s = s:bb.light1_soft | let s:fg1_h = s:bb.light1_hard
+  let s:fg2  = s:bb.light2 | let s:fg2_s = s:bb.light2_soft | let s:fg2_h = s:bb.light2_hard
   let s:fg3  = s:bb.light3 | let s:fg4   = s:bb.light4
 
   let s:fg4_256 = s:bb.light4_256
 
   let s:red    = s:bb.bright_red
   let s:green  = s:bb.bright_green
-  let s:yellow = s:bb.special_yellow "s:bb.bright_yellow
+  let s:yellow = s:bb.bright_yellow "s:bb.special_yellow
   let s:blue   = s:bb.bright_blue
-  let s:purple = s:bb.special_purple "bright_purple
+  let s:purple = s:bb.bright_purple "special_purple
   let s:aqua   = s:bb.bright_aqua
   let s:orange = s:bb.bright_orange
 
@@ -309,19 +328,27 @@ if s:is_dark  " determine relative colors
   let s:bg_aqua   = s:bb.bg_dark_aqua
   let s:bg_orange = s:bb.bg_dark_orange
 
+  let s:hue_red    = s:bb.bg_light_red
+  let s:hue_green  = s:bb.bg_light_green
+  let s:hue_yellow = s:bb.bg_light_yellow
+  let s:hue_blue   = s:bb.bg_light_blue
+  let s:hue_purple = s:bb.bg_light_purple
+  let s:hue_aqua   = s:bb.bg_light_aqua
+  let s:hue_orange = s:bb.bg_light_orange
+
   let s:search_background = s:bb.faded_blue
 
 else "{{{     LIGHT THEME
   " if     g:bruvbox_contrast_light ==? 'soft' | let s:bg0  = s:bb.light0_soft
-  " elseif g:bruvbox_contrast_light ==? 'hard' | let s:bg0  = s:bb.light0_hard | endif   
+  " elseif g:bruvbox_contrast_light ==? 'hard' | let s:bg0  = s:bb.light0_hard | endif
   let s:bg_hard = s:bb.white
   let s:fg_hard = s:bb.black
 
   let s:bg0  = s:bb.light0 | let s:bg0_s = s:bb.light0_soft | let s:bg0_m = s:bb.light0_medium | let s:bg0_h = s:bb.light0_hard
   " XXX fix actual shades for these
   let s:bg0_h2 = s:bb.light0_hard
-  let s:bg1  = s:bb.light1 | let s:bg1_s  = s:bb.light1 | let s:bg1_h  = s:bb.light1 | 
-  let s:bg2  = s:bb.light2 | let s:bg2_s  = s:bb.light2 | let s:bg2_h  = s:bb.light2 | 
+  let s:bg1  = s:bb.light1 | let s:bg1_s  = s:bb.light1 | let s:bg1_h  = s:bb.light1 |
+  let s:bg2  = s:bb.light2 | let s:bg2_s  = s:bb.light2 | let s:bg2_h  = s:bb.light2 |
   let s:bg3  = s:bb.light3 | let s:bg4    = s:bb.light4
 
   let s:gray = s:bb.gray_244 | let s:gray2 = s:bb.gray_248
@@ -341,13 +368,21 @@ else "{{{     LIGHT THEME
   let s:aqua   = s:bb.faded_aqua
   let s:orange = s:bb.faded_orange
 
-  let s:bg_red    = s:bb.bg_light_red    
-  let s:bg_green  = s:bb.bg_light_green  
-  let s:bg_yellow = s:bb.bg_light_yellow 
-  let s:bg_blue   = s:bb.bg_light_blue   
-  let s:bg_purple = s:bb.bg_light_purple 
-  let s:bg_aqua   = s:bb.bg_light_aqua   
-  let s:bg_orange = s:bb.bg_light_orange 
+  let s:bg_red    = s:bb.bg_light_red
+  let s:bg_green  = s:bb.bg_light_green
+  let s:bg_yellow = s:bb.bg_light_yellow
+  let s:bg_blue   = s:bb.bg_light_blue
+  let s:bg_purple = s:bb.bg_light_purple
+  let s:bg_aqua   = s:bb.bg_light_aqua
+  let s:bg_orange = s:bb.bg_light_orange
+
+  let s:hue_red    = s:bb.bg_dark_red
+  let s:hue_green  = s:bb.bg_dark_green
+  let s:hue_yellow = s:bb.bg_dark_yellow
+  let s:hue_blue   = s:bb.bg_dark_blue
+  let s:hue_purple = s:bb.bg_dark_purple
+  let s:hue_aqua   = s:bb.bg_dark_aqua
+  let s:hue_orange = s:bb.bg_dark_orange
 
   let s:search_background = s:bb.special_blue
 
@@ -414,16 +449,16 @@ let g:bruvbox_palette = s:bb
 " modifies global var, save that to like a ~/.config/bruvbox type ting, and offer to source palette from there instead next time. Full dynamic + then easy to adapt to other envs
 "}}}
 
-"{{{1         Overload Setting: 
+"{{{1         Overload Setting:
 let s:hls_cursor           = get(s:bb, get(g:, 'bruvbox_hls_cursor',     'faded_blue'))
 " let s:search_background    = get(s:bb, get(g:, 'bruvbox_search_background', 'faded_blue'))
-let s:cursorline_bg        = get(s:,   get(g:, 'bruvbox_cursorline_bg',  'bg0_s'))
+let s:cursorline_bg        = get(s:,   get(g:, 'bruvbox_cursorline_bg',  'bg0_s')) " cline and ccolumn have been 0_s but tiring
 let s:underline_cursorline =           get(g:, 'bruvbox_underline_cursorline',  0)
 " trad colors for these were: h, s, s, s
 let s:number_column        = get(s:,   get(g:, 'bruvbox_number_column',  'bg0_s'))
-let s:color_column         = get(s:,   get(g:, 'bruvbox_color_column',   'bg0_s'))
-let s:sign_column          = get(s:,   get(g:, 'bruvbox_sign_column',    'bg0_m'))
-let s:fold_column          = get(s:,   get(g:, 'bruvbox_fold_column',    'bg0_m'))
+let s:color_column         = get(s:,   get(g:, 'bruvbox_color_column',   'bg0'))
+let s:sign_column          = get(s:,   get(g:, 'bruvbox_sign_column',    'bg0_s'))
+let s:fold_column          = get(s:,   get(g:, 'bruvbox_fold_column',    'bg0_h'))
 if get(g:, 'gitgutter_override_sign_column_highlight', 0) == 1
   let s:sign_column = s:number_column  | let g:gitgutter_override_sign_column_highlight = 0 | endif
 let s:vert_split           = get(s:,   get(g:, 'bruvbox_vert_split',     'bg0_h'))  "bg1
@@ -446,13 +481,12 @@ let s:color_mode_visual    = get(g:, 'bruvbox_visual_mode_color',     s:purple) 
 let s:replace_mode_color   = get(g:, 'bruvbox_replace_mode_color',    s:yellow)  "yellow sign, dito
 
 " }}}
-"{{{1         Highlighting Function: 
+"{{{1         Highlighting Function:
 
 function! s:HL(group, fg, ...)  " Arguments: group, guifg, guibg, gui, guisp
   let fg = a:fg
-  if a:0 >= 1  | let bg = a:1   | else   | let bg = s:none          | endif
-  if a:0 >= 2 && strlen(a:2)    | let mod = a:2
-  else                          | let mod = 'NONE,'                 | endif
+  if a:0 >= 1                | let bg = a:1   | else | let bg = s:none   | endif
+  if a:0 >= 2 && strlen(a:2) | let mod = a:2  | else | let mod = 'NONE,' | endif
 
   if a:0 >= 3
     if g:bruvbox_guisp_fallback !=? 'NONE'  | let fg = a:3          | endif
@@ -467,9 +501,20 @@ function! s:HL(group, fg, ...)  " Arguments: group, guifg, guibg, gui, guisp
   execute join(hi, ' ')
 endfunction
 
+function! s:HLCategory(group_suffix, var_prefix, ...)
+" Should work like above but only one call. eg
+ call s:HLCategory('', '') "runs BruvboxRed, s:red through BruvboxOrange, s:orange
+ call s:HLCategory('Bold', '', s:none, s:bold)
+ call s:HLCategory('Neutral', 'neutral')
+ " will have to massively redo lots tho. Focus on finishing the colorscheme then use that builder for vim,
+ " develop various scripts for tmux, alacritty, iterm, fish etc?
+ " just have core set of (2-3?) hues per color and some base saturations/brightnesses
+ " then rest should self-generate from there, including in vim...
+ 
+endfunction
 " }}}
-"{{{1         Bruvbox Hi Groups: 
-"{{{          FG / BG 
+"{{{1         Bruvbox Hi Groups:
+"{{{          FG / BG
 call s:HL('BruvboxFg0',  s:fg0)  | call s:HL('BruvboxFg0_h', s:fg0_h) | call s:HL('BruvboxFg0_m', s:fg0_m) | call s:HL('BruvboxFg0_s', s:fg0_s)
 call s:HL('BruvboxFg1',  s:fg1)  | call s:HL('BruvboxFg1_h', s:fg1_h)
 call s:HL('BruvboxFg2',  s:fg2)  | call s:HL('BruvboxFg2_h', s:fg2_h)
@@ -510,13 +555,20 @@ call s:HL('BruvboxAquaNeutral',    s:neutral_aqua)
 call s:HL('BruvboxOrangeNeutral',  s:neutral_orange)
 
 " will have to experiment with light or dark fg...
-call s:HL('BruvboxRedFadedBg',       s:bb.light0,      s:bb.faded_red,     s:bold)
-call s:HL('BruvboxGreenFadedBg',     s:bb.light0,      s:bb.faded_green,   s:bold)
+call s:HL('BruvboxRedFadedBg',       s:bb.light2,      s:bb.faded_red,     s:bold)
+call s:HL('BruvboxGreenFadedBg',     s:bb.light2,      s:bb.faded_green,   s:bold)
 call s:HL('BruvboxYellowFadedBg',    s:bb.dark0,       s:bb.faded_yellow,  s:bold)
-call s:HL('BruvboxBlueFadedBg',      s:bb.light0,      s:bb.faded_blue,    s:bold)
-call s:HL('BruvboxPurpleFadedBg',    s:bb.light0,      s:bb.faded_purple,  s:bold)
-call s:HL('BruvboxAquaFadedBg',      s:bb.light0,      s:bb.faded_aqua,    s:bold)
+call s:HL('BruvboxBlueFadedBg',      s:bb.light2,      s:bb.faded_blue,    s:bold)
+call s:HL('BruvboxPurpleFadedBg',    s:bb.light2,      s:bb.faded_purple,  s:bold)
+call s:HL('BruvboxAquaFadedBg',      s:bb.light2,      s:bb.faded_aqua,    s:bold)
 call s:HL('BruvboxOrangeFadedBg',    s:bb.dark0,       s:bb.faded_orange,  s:bold)
+" call s:HL('BruvboxRedFadedBg',       s:bb.light0,      s:bb.faded_red,     s:bold)
+" call s:HL('BruvboxGreenFadedBg',     s:bb.light0,      s:bb.faded_green,   s:bold)
+" call s:HL('BruvboxYellowFadedBg',    s:bb.dark0,       s:bb.faded_yellow,  s:bold)
+" call s:HL('BruvboxBlueFadedBg',      s:bb.light0,      s:bb.faded_blue,    s:bold)
+" call s:HL('BruvboxPurpleFadedBg',    s:bb.light0,      s:bb.faded_purple,  s:bold)
+" call s:HL('BruvboxAquaFadedBg',      s:bb.light0,      s:bb.faded_aqua,    s:bold)
+" call s:HL('BruvboxOrangeFadedBg',    s:bb.dark0,       s:bb.faded_orange,  s:bold)
 
 " for sign column, also other minor standout highlights since sign column (by default anyways) has light bg than Normal
 call s:HL('BruvboxRedSign',        s:red,            s:sign_column,      s:invert_signs)
@@ -527,6 +579,15 @@ call s:HL('BruvboxPurpleSign',     s:purple,         s:sign_column,      s:inver
 call s:HL('BruvboxAquaSign',       s:aqua,           s:sign_column,      s:invert_signs)
 call s:HL('BruvboxOrangeSign',     s:orange,         s:sign_column,      s:invert_signs)
 call s:HL('BruvboxFgSign',         s:fg_hard,        s:sign_column,      s:invert_signs)
+
+" alt sign. fixup faded tho
+call s:HL('BruvboxRedSignFaded',        s:bb.faded_red,          s:sign_column,      s:invert_signs)
+call s:HL('BruvboxGreenSignFaded',      s:bb.faded_green,        s:sign_column,      s:invert_signs)
+call s:HL('BruvboxYellowSignFaded',     s:bb.faded_yellow,       s:sign_column,      s:invert_signs)
+call s:HL('BruvboxBlueSignFaded',       s:bb.faded_blue,         s:sign_column,      s:invert_signs)
+call s:HL('BruvboxPurpleSignFaded',     s:bb.faded_purple,       s:sign_column,      s:invert_signs)
+call s:HL('BruvboxAquaSignFaded',       s:bb.faded_aqua,         s:sign_column,      s:invert_signs)
+call s:HL('BruvboxOrangeSignFaded',     s:bb.faded_orange,       s:sign_column,      s:invert_signs)
 
 " light-ish background, text regular. prob should make sure it's not fully the
 " same as any other bg color, so it will always stand out at least a bit...
@@ -540,13 +601,6 @@ call s:HL('BruvboxOrangeInfo',     s:orange,         s:bg1_h,            s:itali
 call s:HL('BruvboxFgInfo',         s:fg_hard,        s:bg1,              s:italic)
 
 " faint as fuck, bg only, text must be proper white/black
-" call s:HL('BruvboxRedBg',          s:bb.fg0,      s:bg_red      )
-" call s:HL('BruvboxGreenBg',        s:bb.fg0,      s:bg_green    )
-" call s:HL('BruvboxYellowBg',       s:bb.fg0,      s:bg_yellow,  )
-" call s:HL('BruvboxBlueBg',         s:bb.fg0,      s:bg_blue     )
-" call s:HL('BruvboxPurpleBg',       s:bb.fg0,      s:bg_purple,  )
-" call s:HL('BruvboxAquaBg',         s:bb.fg0,      s:bg_aqua     )
-" call s:HL('BruvboxOrangeBg',       s:bb.fg0,      s:bg_orange,  )
 call s:HL('BruvboxRedBg',          s:none,      s:bg_red      )
 call s:HL('BruvboxGreenBg',        s:none,      s:bg_green    )
 call s:HL('BruvboxYellowBg',       s:none,      s:bg_yellow,  )
@@ -555,14 +609,14 @@ call s:HL('BruvboxPurpleBg',       s:none,      s:bg_purple,  )
 call s:HL('BruvboxAquaBg',         s:none,      s:bg_aqua     )
 call s:HL('BruvboxOrangeBg',       s:none,      s:bg_orange,  )
 
-" same color but fg 
-call s:HL('BruvboxRedHue',         s:bg_red)
-call s:HL('BruvboxGreenHue',       s:bg_green)
-call s:HL('BruvboxYellowHue',      s:bg_yellow)
-call s:HL('BruvboxBlueHue',        s:bg_blue)
-call s:HL('BruvboxPurpleHue',      s:bg_purple)
-call s:HL('BruvboxAquaHue',        s:bg_aqua)
-call s:HL('BruvboxOrangeHue',      s:bg_orange)
+" same color but fg "no that's super pointless
+call s:HL('BruvboxRedHue',         s:hue_red)
+call s:HL('BruvboxGreenHue',       s:hue_green)
+call s:HL('BruvboxYellowHue',      s:hue_yellow)
+call s:HL('BruvboxBlueHue',        s:hue_blue)
+call s:HL('BruvboxPurpleHue',      s:hue_purple)
+call s:HL('BruvboxAquaHue',        s:hue_aqua)
+call s:HL('BruvboxOrangeHue',      s:hue_orange)
 
 call s:HL('BruvboxRedSpecial',     s:bb.special_red,       s:none)
 call s:HL('BruvboxGreenSpecial',   s:bb.special_green,     s:none)
@@ -573,32 +627,33 @@ call s:HL('BruvboxAquaSpecial',    s:bb.special_aqua,      s:none)
 call s:HL('BruvboxOrangeSpecial',  s:bb.special_orange,    s:none)
 
 " mode color groups
-call s:HL('BruvboxNormalModeColor', s:color_mode_normal,   s:none)
-call s:HL('BruvboxInsertModeColor', s:color_mode_insert,   s:none)
-call s:HL('BruvboxVisualModeColor', s:color_mode_visual,   s:none)
-call s:HL('BruvboxCursorLineNr',    s:color_mode_normal,   s:color_column)
+call s:HL('BruvboxNormalModeColor', s:color_mode_normal,   s:color_column, s:bold)
+call s:HL('BruvboxInsertModeColor', s:color_mode_insert,   s:color_column, s:bold)
+call s:HL('BruvboxVisualModeColor', s:color_mode_visual,   s:color_column, s:bold)
+call s:HL('BruvboxCursorLineNr',    s:color_mode_normal,   s:color_column, s:bold)
 
 " }}}
 
 
 " Vanilla colorscheme ---------------------------------------------------------
-"{{{1         General UI: 
-call s:HL('Normal',         s:fg1_h,            s:bg0)  " got errors when not defining both fg and bg for normal. Undef bg seems better for neovim though, from reading through issues. Check that gruvbox PR allowing this.
+"{{{1         General UI:
+" call s:HL('Normal',         s:fg1_h,            s:bg0)  " got errors when not defining both fg and bg for normal. Undef bg seems better for neovim though, from reading through issues. Check that gruvbox PR allowing this.
+call s:HL('Normal',         s:fg0_s,            s:bg0)  " got errors when not defining both fg and bg for normal. Undef bg seems better for neovim though, from reading through issues. Check that gruvbox PR allowing this.
 if s:is_dark | set background=dark   | else | set background=light    | endif   "workaround for vim being a shithead
 
 call s:HL('CursorLine',     s:none,           s:cursorline_bg)
 hi!  link  CursorColumn     CursorLine
 " below aint working, dunno why... so augroup still in vimrc for now.
-" if s:underline_cursorline == 1      | augroup CursorLine | autocmd!
-"     autocmd InsertEnter * 	highlight CursorLine gui=underline,bold cterm=underline,bold
-"     autocmd InsertLeave * 	highlight CursorLine gui=none           cterm=none
-"   augroup END                       | endif
+if s:underline_cursorline == 1
+  augroup CursorLine | autocmd!
+    autocmd InsertEnter * 	highlight CursorLine gui=underline,bold cterm=underline,bold | hi! link CursorLineNr BruvboxRedSign      | hi! link VertSplit BruvboxInsertModeColor
+    autocmd InsertLeave * 	highlight CursorLine gui=bold           cterm=bold           | hi! link CursorLineNr BruvboxCursorLineNr | hi! link VertSplit BruvboxNormalModeColor
+  augroup END
+endif
 
 call s:HL('TabLineFill',    s:fg4,            s:bg0_h,          s:invert_tabline)
 call s:HL('TabLineSel',     s:vim_bg,         s:bg4,            s:bold . s:invert_tabline)
 call s:HL('TabLine',        s:fg4,            s:bg0_m)
-
-hi! link   MatchParen       Visual
 
 call s:HL('QuickFixLine',   s:vim_fg,         s:vim_bg,         s:underline)
 
@@ -610,7 +665,8 @@ hi! link   SpecialKey       BruvboxBg3              "'unprintable characters' wh
 call s:HL('NonText',        s:bg0_s,          s:none)  "eol, TODO: support for if want colorcolumn/nontext bg to fade darker instead of lighter, fg needs to follow along
 call s:HL('Whitespace',     s:bg0_s,          s:none)  "tab chars and stuff. links to NonText by default
 call s:HL('EndOfBuffer',    s:color_column,   s:color_column)  "fg completely invisible, so dont have to see the stupid ~s after EOF
-call s:HL('Visual',         s:none,           s:bg0_s,          s:invert_selection)
+" call s:HL('Visual',         s:none,           s:bg0_s,          s:invert_selection)
+call s:HL('Visual',         s:none,           s:none,          s:invert_selection)
 hi! link   VisualNOS        Visual                             "removed from neovim but meh, no harm
 
 " call s:HL('Search',         s:bb.light0,          s:hls_cursor,)  "     s:invert_search)
@@ -618,14 +674,20 @@ call s:HL('Search',         s:fg0,          s:search_background,)  "     s:inver
 " call s:HL('Search',         s:fg0,          s:bg_blue,)  "     s:invert_search)
 " call s:HL('IncSearch',      s:hls_cursor,            s:fg1,       s:underline) ". s:invert_search)  " current match: flipped from Search. Blue on white instead of white on blue...
 hi! link  IncSearch         Visual
-" call s:HL('IncSearchCursor', s:fg0_s,         s:bb.faded_blue,    s:bold . s:invert_search)       
-call s:HL('IncSearchCursor', s:hls_cursor,           s:fg0_s,       s:bold) " . s:invert_search)       
+" call s:HL('IncSearchCursor', s:fg0_s,         s:bb.faded_blue,    s:bold . s:invert_search)
+call s:HL('IncSearchCursor', s:hls_cursor,           s:fg0_s,       s:bold) " . s:invert_search)
 
 call s:HL('Underlined',     s:none,           s:none,             s:underline)
 
 call s:HL('StatusLine',     s:bg0_h,          s:fg4,              s:inverse)      " try blending LineNr-VertSplit-TabLine-StatusLine... as bg0_h
 call s:HL('StatusLineNC',   s:bg0_h,          s:color_mode_normal, s:inverse)
-call s:HL('VertSplit',      s:bg0_s,          s:bg0_h) "shifts focus from fg to fg turning it into more like a double pipe, looks fucking great!
+" call s:HL('VertSplit',      s:bg0_s,          s:bg0_h) "shifts focus from fg to fg turning it into more like a double pipe, looks fucking great!
+call s:HL('VertSplit',      s:vert_split,     s:bg0_h) "shifts focus from fg to fg turning it into more like a double pipe, looks fucking great!
+
+" hi! link   MatchParen       BruvboxFgHard "maybe add underline too? Visual no good atm cause bug that makes cursor disappear on parens...ugh
+hi! link   MatchParen       Visual
+" call s:HL('MatchParen',         s:none,           s:bg0_s,          inverse)
+" hi! link   MatchParen       Underlined
 
 
 hi! link   Directory        BruvboxBlueSign  "BruvboxBlueSpecial    " Directory names, special names in listing
@@ -636,7 +698,7 @@ hi! link   Question         BruvboxYellowInfo     " 'Press enter' prompt and yes
 hi! link   MoreMsg          BruvboxFg4            " More prompt: -- More --
 hi! link   ModeMsg          BruvboxFg2            " Current mode message: -- INSERT --
 
-"{{{1         Gutter: 
+"{{{1         Gutter:
 call s:HL('LineNr',         s:bg2_s,          s:number_column)
 " call s:HL('LineNr',         s:bg3,          s:number_column)
 hi!  link  CursorLineNr     BruvboxCursorLineNr   " Linked his way because we need the original stored somewhere when switching fg color dynamically for insert mode, via autocmds.
@@ -644,74 +706,82 @@ call s:HL('SignColumn',     s:none,           s:sign_column)
 
 call s:HL('Folded',         s:bb.special_blue, s:fold_column,  s:italic) "Line used for closed folds
 call s:HL('FoldColumn',     s:bg0,             s:fold_column)            "Best compromise between legibility and not looking like shit I've come up with thus far
-"{{{1         Cursor: 
-call s:HL('Cursor',         s:none,           s:none,    s:inverse) " Character under cursor
-call s:HL('vCursor',        s:none,           s:none,    s:inverse . s:underline . s:bold)  " Visual mode cursor, selection
+"{{{1         Cursor:
+" call s:HL('Cursor',         s:none,           s:none,    s:inverse) " Character under cursor
+hi! link  Cursor            Visual
+" hi! Cursor gui=s:inverse cterm=s:inverse
+call s:HL('vCursor',        s:none,           s:none,    s:inverse . s:underline . s:bold)  " Visual mode cursor, needs more stuff to stand out since regular cursor hl same as Visual hl
 hi! link  iCursor           Cursor                              " Input mode cursor
 hi! link  lCursor           Cursor                              " Language mapping cursor
 hi! link  TermCursor        Cursor
 " call s:HL('TermCursorNC')  "cleared
 
-" {{{1       Syntax Highlighting: 
+" {{{1       Syntax Highlighting:
 
 hi! link   Special          BruvboxOrange
 
 hi! link   Todo             BruvboxPurpleSign
-hi! link   Error            BruvboxRedSign
+hi! link   Error            ErrorMsg
 
 " FLOW
 hi! link   Statement        BruvboxBlue             " Generic statement. def, return
-hi! link   Conditional      BruvboxBlueBold         " if, then, else, endif, switch, etc
-hi! link   Repeat           BruvboxBlueSign         " for, do, while, etc.
-hi! link   Label            BruvboxBlueNeutral      " case, default, etc.
-hi! link   Exception        BruvboxBlueInfo         " try, catch, throw, except, etc.
+" hi! link   Conditional      BruvboxBlueBold         " if, then, else, endif, switch, etc
+hi! link   Conditional      BruvboxBlueHue          " if, then, else, endif, switch, etc
+hi! link   Repeat           BruvboxBlueInfo         " for, do, while, etc.
+hi! link   Label            BruvboxBlueSign         " case, default, etc.
 hi! link   Keyword          BruvboxBlueSpecial      " any other keyword
 
+hi! link   Exception        BruvboxRedInfo          " try, catch, throw, except, etc.
+
 hi! link   Operator         BruvboxFgHard            " sizeof, "+", "*", etc.
-" hi! link   Delimiter        ?                     " links to Special default
+" hi! link   Delimiter        BruvboxFg2
+hi! link   Delimiter        BruvboxOrangeSign
 
 hi! link   Identifier       BruvboxRed              " Variable name
-" hi! link   Function         BruvboxOrangeSpecial
-call s:HL('Function',       s:bb.special_orange,  s:none,  s:bold)
+hi! link   Function         BruvboxOrangeSpecial
+" call s:HL('Function',       s:bb.bright_orange,  s:none,  s:bold)
+" call s:HL('Function',       s:bb.bright_orange,  s:none)
 
 " IMPORT / INCLUDE / PREPROCESSOR / MACROS
 hi! link   PreProc          BruvboxAqua             " Generic   preprocessor
-hi! link   Include          BruvboxAqua
+hi! link   Include          BruvboxAquaSpecial
 hi! link   Define           BruvboxAquaSign
 hi! link   Macro            BruvboxAquaSign         " Same as Define
 hi! link   PreCondit        BruvboxAquaBold
 
 " NUMBERS N SHIT
 hi! link   Constant         BruvboxPurpleSign       " Generic   constant
-hi! link   Character        BruvboxPurple           " Character constant: 'c', '/n'
+hi! link   Character        BruvboxPurpleHue        " Character constant: 'c', '/n'
 hi! link   Number           BruvboxPurple
-hi! link   Float            BruvboxPurple
+" hi! link   Float            BruvboxPurpleSpecial
+hi! link   Float            BruvboxPurpleBold
 hi! link   Boolean          BruvboxRedSign
 
-hi! link   Type             BruvboxYellow           " Generic type
-hi! link   StorageClass     BruvboxYellowNeutral       " static, register, volatile, etc
-hi! link   Structure        BruvboxYellowSign        " struct, union, enum, etc.
+hi! link   Type             BruvboxYellowHue        " Generic type
+hi! link   StorageClass     BruvboxYellowNeutral    " static, register, volatile, etc
+hi! link   Structure        BruvboxYellowSign       " struct, union, enum, etc.
 hi! link   Typedef          BruvboxYellowBold
 call s:HL('String',         s:green,         s:none,               s:italicize_strings)
 call s:HL('Comment',        s:gray,          s:none,               s:italicize_comments)
 
-" {{{1        Completion: 
-call s:HL('Pmenu',          s:fg1,           s:cursorline_bg)     " Popup menu: normal item, makes sense to link bg to whatever used for CursorLine, so drops down smoothly :)
+" {{{1        Completion:
+" call s:HL('Pmenu',          s:fg1,           s:cursorline_bg)     " Popup menu: normal item, makes sense to link bg to whatever used for CursorLine, so drops down smoothly :)
+call s:HL('Pmenu',          s:fg1,           s:bg1_s)     " Popup menu: normal item, makes sense to link bg to whatever used for CursorLine, so drops down smoothly :)
 call s:HL('PmenuSel',       s:fg0,           s:neutral_blue,       s:bold)  " selected item     s:bg0_s, s:blue
 call s:HL('PmenuSbar',      s:none,          s:bg0_h)             " scrollbar
 call s:HL('PmenuThumb',     s:none,          s:bb.bg_light_blue)   " scrollbar thumb       s:none, s:bg2
 
 call s:HL('WildMenu',       s:fg0,           s:bb.faded_blue,      s:bold)  " Current match in wildmenu completion     s:blue,  s:bg1,
-"{{{1         Diffs: 
-" call s:HL('DiffAdd',        s:none,          s:bb.bg_dark_green)
-hi! link   DiffAdd          BruvboxGreenBg
-" call s:HL('DiffDelete',     s:none,          s:bb.bg_dark_red)  
-hi! link   DiffDelete       BruvboxRedBg
-" call s:HL('DiffChange',     s:none,          s:bb.bg_dark_yellow)
-hi! link   DiffChange       BruvboxYellowBg
-call s:HL('DiffText',       s:none,          s:bb.faded_green,     s:inverse)  " The actual changed text in changed line...
+"{{{1         Diffs:
+call s:HL('DiffAdd',        s:none,          s:bb.bg_dark_green)
+" hi! link   DiffAdd          BruvboxGreenFadedBg
+call s:HL('DiffDelete',     s:none,          s:bb.bg_dark_red)
+" hi! link   DiffDelete       BruvboxRedFadedBg
+call s:HL('DiffChange',     s:none,          s:bb.bg_dark_yellow)
+" hi! link   DiffChange       BruvboxYellowFadedBg
+call s:HL('DiffText',       s:none,          s:none,     s:undercurl . s:italic, s:yellow)  " The actual changed text in changed line...
 
-"{{{1         Spelling: 
+"{{{1         Spelling:
 if has('spell')
   call s:HL('SpellCap',     s:green,         s:none,               s:bold . s:italic)   " Not capitalised word, or compile warnings
   call s:HL('SpellBad',     s:none,          s:none,               s:undercurl,   s:blue)
@@ -726,19 +796,19 @@ if has('nvim')
   " wasnt working prev bc all defs are rgb+256-index, so must grab the first one and not entire thing
 
   " base 8 colors:
-  let g:terminal_color_0  = s:bg0_h[0]
+  let g:terminal_color_0  = s:bg1[0]
   let g:terminal_color_1  = s:red[0]
   let g:terminal_color_2  = s:green[0]
   let g:terminal_color_3  = s:yellow[0]
   let g:terminal_color_4  = s:blue[0]
   let g:terminal_color_5  = s:purple[0]
   let g:terminal_color_6  = s:aqua[0]
-  let g:terminal_color_7  = s:fg0_s[0]
+  let g:terminal_color_7  = s:fg2_s[0]
   " bright/bold dittos:
   let g:terminal_color_8  = s:bg2[0]
   let g:terminal_color_9  = s:orange[0]
-  let g:terminal_color_10 = s:special_yellow[0]
-  let g:terminal_color_11 = s:special_green[0]
+  let g:terminal_color_10 = s:special_green[0]
+  let g:terminal_color_11 = s:special_yellow[0]
   let g:terminal_color_12 = s:special_blue[0]
   let g:terminal_color_13 = s:special_purple[0]
   let g:terminal_color_14 = s:special_aqua[0]
@@ -751,7 +821,7 @@ endif
 
 "{{{1 Plugin specific -------------------------------------------------------------
 
-
+hi! link ExtraWhitespace BruvboxRedBg
 "{{{2          ColDevIcons test
 
 let g:coldevicons_colormap = {
@@ -780,98 +850,154 @@ let g:coldevicons_colormap = {
 if s:invert_targets == 0 | call s:HL('JumpTarget',  s:bb.special_blue,  s:bg_hard,    s:bold)
 else                     | call s:HL('JumpTarget',  s:fg0_h,            s:bb.faded_blue)    | endif
 
-"{{{2         ChooseWin:
-hi! link  ChooseWinLabel          BruvboxBlueSign
-hi! link  ChooseWinLabelCurrent   BruvboxOrangeSign
-hi! link  ChooseWinLand           BruvboxAqua
-hi! link  ChooseWinOther          BruvboxOrangeSign
-hi! link  ChooseWinOverlay        BruvboxBlueSign
-hi! link  ChooseWinOverlayCurrent BruvboxOrangeSign
-hi! link  ChooseWinShade          BruvboxBg3
+" background/undercurl highlighting
+" call s:HL('BruvboxErrorUndercurl',   s:none, s:bg_red,    s:undercurl, s:red)
+" call s:HL('BruvboxWarningUndercurl', s:none, s:bg_yellow, s:undercurl, s:yellow)
+" call s:HL('BruvboxInfoUndercurl',    s:none, s:bg_green,  s:undercurl, s:green)
+" call s:HL('BruvboxHintUndercurl',    s:none, s:bg_blue,   s:undercurl, s:blue)
+" do have undercurl working in Kitty. And set fixed in tmux yet not showing up (same w italics)
+call s:HL('BruvboxErrorUndercurl',   s:none, s:none,  s:undercurl, s:red)
+call s:HL('BruvboxWarningUndercurl', s:none, s:none,  s:undercurl, s:yellow)
+call s:HL('BruvboxInfoUndercurl',    s:none, s:none,  s:undercurl, s:green)
+call s:HL('BruvboxHintUndercurl',    s:none, s:none,  s:undercurl, s:blue)
+hi! link BruvboxSignAdd             BruvboxGreenSign
+hi! link BruvboxSignChange          BruvboxAquaSign
+hi! link BruvboxSignDelete          BruvboxRedSign
+hi! link BruvboxSignChangeDelete    BruvboxOrangeSign
 
-"{{{2         EasyMotion: 
+hi! link BruvboxSignError           BruvboxRedSign
+hi! link BruvboxSignWarning         BruvboxYellowSign
+hi! link BruvboxSignInfo            BruvboxFgSign
+hi! link BruvboxSignHint            BruvboxBlueSign
+
+"{{{2         Nvim general subtypes:
+
+
+"{{{2         ChooseWin:
+let g:choosewin_color_land            ={'gui': ['', '', s:inverse], 'cterm': ['', '', s:inverse]}
+let g:choosewin_color_other           ={'gui': [s:bg0_h[0], s:green[0], ''], 'cterm': ['', s:green[1], '']}
+let g:choosewin_color_label           ={'gui': [s:orange[0], s:bg0_h[0], s:bold],
+                                    \ 'cterm': [s:orange[1], s:bg0_h[1], s:bold]}
+let g:choosewin_color_label_current   ={'gui': [s:green[0], s:bg0_h[0], s:bold],
+                                    \ 'cterm': [s:green[1], s:bg0_h[1], s:bold]}
+" let g:choosewin_color_shade           =
+" let g:choosewin_color_overlay_current =
+" let g:choosewin_color_overlay         =
+
+"{{{2         EasyMotion:
 "for motion/search/jump plugs
 hi! link  EasyMotionTarget   JumpTarget
 hi! link  EasyMotionShade    Comment
 
-"{{{2         Sneak: 
+"{{{2         Sneak:
 hi! link  Sneak              JumpTarget
 hi! link  SneakScope         BruvboxBgHard
 " hi! link SneakLabel         Search        "defaults to mirroring Sneak
 hi! link  SneakLabelMask     Comment
 
-"{{{2         Lista: 
+"{{{2         Lista:
 hi! link  ListaSearchHitBuffer   JumpTarget
 " hi! link  ListaSearchHitFuzzy   "make something like, HL each char properly, then somewhere between faded and hit for the span between.
 " hi! link  ListaSearchShade       Comment
 
-"{{{2         Indent Guides: 
+"{{{2         Indent Guides:
 if !exists('g:indent_guides_auto_colors') | let g:indent_guides_auto_colors = 0 | endif
 if g:indent_guides_auto_colors == 0
   if g:bruvbox_invert_indent_guides == 0
     call s:HL('IndentGuidesEven', s:vim_bg, s:bg0)
     call s:HL('IndentGuidesOdd',  s:vim_bg, s:bg0_h2)
   else
-    call s:HL('IndentGuidesOdd',  s:vim_bg, s:bg2, s:inverse)
     call s:HL('IndentGuidesEven', s:vim_bg, s:bg3, s:inverse)
+    call s:HL('IndentGuidesOdd',  s:vim_bg, s:bg2, s:inverse)
   endif
 endif
 " IndentLine: {{{2
 if !exists('g:indentLine_color_term') | let g:indentLine_color_term = s:bg2[1] | endif
 if !exists('g:indentLine_color_gui')  | let g:indentLine_color_gui  = s:bg2[0] | endif
 
-"{{{2         Rainbow Parentheses: 
-if !exists('g:rbpt_colorpairs')
-  let g:rbpt_colorpairs = [
-      \ ['blue', '#458588'],  ['magenta', '#b16286'],
-      \ ['red',  '#cc241d'],  ['166',     '#d65d0e']  ]
-endif
+"{{{2         Rainbow Parentheses:
+" if !exists('g:rbpt_colorpairs')
+"   let g:rbpt_colorpairs = [
+"       \ ['blue', '#458588'],  ['magenta', '#b16286'],
+"       \ ['red',  '#cc241d'],  ['166',     '#d65d0e']  ]
+" endif
 
-let g:rainbow_guifgs    = [ '#d65d0e', '#cc241d', '#b16286', '#458588' ]
-let g:rainbow_ctermfgs  = [ '166', 'red', 'magenta', 'blue' ]
+" let g:rainbow_guifgs    = [ '#d65d0e', '#cc241d', '#b16286', '#458588' ]
+" let g:rainbow_ctermfgs  = [ '166', 'red', 'magenta', 'blue' ]
 
-if !exists('g:rainbow_conf')              | let g:rainbow_conf = {}     | endif
-if !has_key(g:rainbow_conf, 'guifgs')     | let g:rainbow_conf['guifgs']    = g:rainbow_guifgs    | endif
-if !has_key(g:rainbow_conf, 'ctermfgs')   | let g:rainbow_conf['ctermfgs']  = g:rainbow_ctermfgs  | endif
+" if !exists('g:rainbow_conf')              | let g:rainbow_conf = {}     | endif
+" if !has_key(g:rainbow_conf, 'guifgs')     | let g:rainbow_conf['guifgs']    = g:rainbow_guifgs    | endif
+" if !has_key(g:rainbow_conf, 'ctermfgs')   | let g:rainbow_conf['ctermfgs']  = g:rainbow_ctermfgs  | endif
 
-let g:niji_dark_colours   = g:rbpt_colorpairs
-let g:niji_light_colours  = g:rbpt_colorpairs
+" let g:niji_dark_colours   = g:rbpt_colorpairs
+" let g:niji_light_colours  = g:rbpt_colorpairs
 
-"{{{2         GitGutter: 
+"{{{2         GitGutter:
 hi! link GitGutterAdd           BruvboxGreenSign
 hi! link GitGutterChange        BruvboxAquaSign
 hi! link GitGutterDelete        BruvboxRedSign
-hi! link GitGutterChangeDelete  BruvboxYellowSign
-""{{{2        GitCommit: 
+hi! link GitGutterChangeDelete  BruvboxOrangeSign
+""{{{2        GitCommit:
 hi! link gitcommitSelectedFile  BruvboxGreen
 hi! link gitcommitDiscardedFile BruvboxRed
-"{{{2         Signify: 
+"{{{2         Signify:
 hi! link SignifySignAdd         BruvboxGreenSign
 hi! link SignifySignChange      BruvboxAquaSign
 hi! link SignifySignDelete      BruvboxRedSign
 "{{{2         ALE:
-call s:HL('ALEError',   s:none, s:bb.bg_dark_red,    s:undercurl, s:red)
-call s:HL('ALEWarning', s:none, s:bb.bg_dark_yellow, s:undercurl, s:yellow)
+hi! link ALEError         BruvboxErrorUndercurl
 hi! link ALEErrorSign     BruvboxRedSign
+hi! link ALEWarning       BruvboxWarningUndercurl
 hi! link ALEWarningSign   BruvboxFgSign "BruvboxYellowSign
-" if blabla like 'use line HL instead of file' <- que?
-"   hi! ALEWarningLine
-"   hi! ALEErrorLine
-" endif
-"{{{2         Syntastic: 
+" set dynamically or w/e, only if that setting...
+" hi! link ALEErrorLine     BruvboxRedBg
+" hi! link ALEWarningLine   BruvboxYellowBg
+"{{{2         Coc:
+hi! link CocErrorHighlight      BruvboxErrorUndercurl
+hi! link CocErrorSign           BruvboxSignError
+hi! link CocErrorFloat          BruvboxRedSpecial
+hi! link CocErrorVirtualText    ErrorMsg
+
+hi! link CocWarningHighlight    BruvboxWarningUndercurl
+hi! link CocWarningSign         BruvboxSignWarning
+hi! link CocWarningFloat        BruvboxYellowSpecial
+hi! link CocWarningVirtualText  WarningMsg
+
+hi! link CocInfoHighlight      BruvboxInfoUndercurl
+hi! link CocInfoSign           BruvboxSignInfo
+hi! link CocInfoFloat          BruvboxFg3
+hi! link CocInfoVirtualText    CocInfoFloat
+
+hi! link CocHintHighlight      BruvboxHintUndercurl
+hi! link CocHintSign           BruvboxSignHint
+hi! link CocHintFloat          BruvboxBlueSpecial
+hi! link CocHintVirtualText    BruvboxSignHint
+
+" hi! link CocCodeLens           BruvboxFg4
+hi! link CocCodeLens           BruvboxGray
+
+call s:HL('CocFloating',        s:fg1_h,  s:bg1_s)
+
+hi! link CocGitAddedSign            BruvboxGreenSign 
+hi! link CocGitChangeRemovedSign    BruvboxAquaSign  
+hi! link CocGitChangedSign          BruvboxOrangeSign 
+hi! link CocGitRemovedSign          BruvboxRedSign    
+" hi! link CocGitTopRemovedSign       
+
+"{{{2         Syntastic:
 hi! link SyntasticError       ALEError
 hi! link SyntasticWarning     ALEWarning
 hi! link SyntasticErrorSign   ALEErrorSign
 hi! link SyntasticWarningSign ALEWarningSign
-"{{{2         Signature: 
+"{{{2         Signature:
 hi! link SignatureMarkText   BruvboxBlueSign
 hi! link SignatureMarkerText BruvboxPurpleSign
-"{{{2         ShowMarks: 
+"{{{2         ShowMarks:
 hi! link ShowMarksHLl     BruvboxBlueSign
 hi! link ShowMarksHLu     BruvboxBlueSign
 hi! link ShowMarksHLo     BruvboxBlueSign
 hi! link ShowMarksHLm     BruvboxBlueSign
-"{{{2         CtrlP: 
+"{{{2         CtrlP:
 hi! link CtrlPMatch       BruvboxBlue
 hi! link CtrlPNoEntries   BruvboxRedInfo
 hi! link CtrlPPrtBase     BruvboxBg1
@@ -880,24 +1006,38 @@ hi! link CtrlPLinePre     BruvboxBg2
 call s:HL('CtrlPMode1',   s:blue, s:bg2,  s:bold)
 call s:HL('CtrlPMode2',   s:bg0,  s:blue, s:bold)
 call s:HL('CtrlPStats',   s:fg4,  s:bg2,  s:bold)
-"{{{2         Startify: 
+"{{{2         Startify:
 hi! link StartifyBracket  BruvboxBg4
 hi! link StartifyFile     BruvboxBlueSign
 hi! link StartifyNumber   BruvboxOrange
 hi! link StartifyPath     BruvboxFg4
 hi! link StartifySlash    BruvboxFg2
 hi! link StartifySection  BruvboxYellow
+hi! link StartifySelect   BruvboxPurple
 hi! link StartifySpecial  BruvboxBg2
-hi! link StartifyHeader   BruvboxOrange
-hi! link StartifyFooter   BruvboxBg2
-"{{{2         NERDTree: 
-hi! link	 NERDTreeOpenable        BruvboxBlueSign		 
-hi! link  NERDTreeClosable        BruvboxOrangeSign	 
+hi! link StartifyHeader   BruvboxBlueSpecial
+hi! link StartifyFooter   BruvboxBg4
+hi! link StartifyVar      BruvboxRedSpecial
+    " StartifyBracket  |  [,]                     |  linked to Delimiter
+    " StartifyFile     |  the actual file         |  linked to Identifier
+    " StartifyFooter   |  the custom footer       |  linked to Title
+    " StartifyHeader   |  the custom header       |  linked to Title
+    " StartifyNumber   |  the numbers between []  |  linked to Number
+    " StartifyPath     |  the path to a file      |  linked to Directory
+    " StartifySection  |  section headers         |  linked to Statement
+    " StartifySelect   |  selected entries        |  linked to Title
+    " StartifySlash    |  slashes in paths        |  linked to Delimiter
+    " StartifySpecial  |  <empty buffer>,<quit>   |  linked to Comment
+    " StartifyVar      |  environment variables   |  linked to StartifyPath
+"{{{2         NERDTree:
+hi! link	 NERDTreeOpenable        BruvboxBlueSign
+hi! link  NERDTreeClosable        BruvboxOrangeSign
 hi! link  NERDTreeDir             Directory
-hi! link  NERDTreeLinkDir         BruvboxAquaSign	 
+hi! link  NERDTreeLinkDir         BruvboxAquaSign
 hi! link  NERDTreeLinkFile        BruvboxFg3
-hi! link  NERDTreeLinkTarget      Comment		
+hi! link  NERDTreeLinkTarget      Comment
 hi! link  NERDTreeDirSlash        Function
+hi! link  NERDTreeDirFlags        BruvboxBlueSign "folder icon
 hi! link  NERDTreeCWD             BruvboxOrangeSign
 hi! link  NERDTreeBookmarkName    BruvboxBlueSpecial
 hi! link  NERDTreeBookmarksLeader BruvboxOrangeHue
@@ -905,11 +1045,11 @@ hi! link  NERDTreeBookmark        BruvboxFg3
 hi! link  NERDTreeHelpTitle       BruvboxBlue
 hi! link  NERDTreeHelp            Comment
 
-"{{{2          Undotree: 
+"{{{2          Undotree:
 hi! link UndotreeAdd      DiffAdd
 hi! link UndotreeChange   DiffChange
-
-"{{{2          Tagbar: 
+" let g:undotree_TreeNodeShape 									=s:bb.glyph_source_omni
+"{{{2          Tagbar:
 
 hi! link  TagbarKind             BruvboxRedInfo     "header of generic 'kinds', functions/variables.
 hi! link  TagbarNestedKind       BruvboxRedSpecial  "kind headers, within scopes.
@@ -930,7 +1070,7 @@ hi! link  TagbarHelpTitle        BruvboxBlue        "prettier/matches nerdtree
 " hi! link  TagbarComment        Comment " The help at the top of the buffer.
 
 
-"{{{2          Matchmaker: 
+"{{{2          Matchmaker:
 hi       Matchmaker       cterm=underline   gui=underline
 " HighlightedyankRegion: {{{2
 hi! link  HighlightedyankRegion   Visual
@@ -964,16 +1104,28 @@ hi! link diffSubname      BruvboxPurpleSign       "BruvboxBlue
 
 " Html: {{{2
 
-hi! link htmlTag            BruvboxBlue
-hi! link htmlEndTag         BruvboxBlue
-
-hi! link htmlTagName        BruvboxAquaBold
-hi! link htmlArg            BruvboxAqua
+" hi! link htmlTag            BruvboxOrangeSpecial  "opening brackets
+hi! link htmlTag            BruvboxFg3  "opening brackets
+hi! link htmlEndTag         BruvboxOrangeSpecial         "closing brackets
+" hi! link htmlEndTag         BruvboxRed         "closing brackets
+hi! link htmlTagN           BruvboxFg3            "unknown tag?
+hi! link htmlTagName        BruvboxAquaSpecial    "div etc
+" hi! link htmlArg            BruvboxRedSpecial
+hi! link htmlArg            BruvboxBlueBold "class, id
 
 hi! link htmlScriptTag      BruvboxPurple
-hi! link htmlTagN           BruvboxFg1
 hi! link htmlSpecialTagName BruvboxAquaBold
 
+" hi! link htmlTag            BruvboxBlue
+" hi! link htmlEndTag         BruvboxWhite
+" hi! link htmlTagN           BruvboxOrange "BruvboxFg1
+" hi! link htmlTagName        BruvboxAquaBold
+" " hi! link htmlArg            BruvboxAqua
+" hi! link htmlArg            BruvboxRedSpecial
+"
+" hi! link htmlScriptTag      BruvboxPurple
+" hi! link htmlSpecialTagName BruvboxAquaBold
+"
 call s:HL('htmlLink', s:fg4, s:none, s:underline)
 
 hi! link htmlSpecialChar BruvboxOrange
@@ -989,10 +1141,10 @@ call s:HL('htmlItalic',          s:vim_fg, s:vim_bg, s:italic)
 
 " Xml: {{{2
 
-hi! link xmlTag               BruvboxBlue
-hi! link xmlEndTag            BruvboxBlue
+hi! link xmlTag               BruvboxFg3
+hi! link xmlEndTag            BruvboxFg1
 hi! link xmlTagName           BruvboxBlue
-hi! link xmlEqual             BruvboxBlue
+hi! link xmlEqual             BruvboxRed
 hi! link docbkKeyword         BruvboxAquaBold
 
 hi! link xmlDocTypeDecl       BruvboxGray
@@ -1014,103 +1166,266 @@ hi! link xmlEntityPunct       BruvboxOrange
 
 call s:HL('vimCommentTitle', s:fg4_256, s:none, s:bold . s:italicize_comments)
 
-hi! link vimNotation  BruvboxOrange
-hi! link vimBracket   BruvboxOrange
-hi! link vimMapModKey BruvboxOrange
-hi! link vimFuncSID   BruvboxFg3
-hi! link vimSetSep    BruvboxFg3
-hi! link vimSep       BruvboxFg3
-hi! link vimContinue  BruvboxFg3
+hi! link vimMap            BruvboxBlueNeutral "BruvboxBlueHue
+"either keys or fns orange, yeah? choose which?
+hi! link vimMapModKey      BruvboxPurpleSpecial          "<Leader> etc
+hi! link vimNotation       BruvboxOrangeSpecial  "<CR> in mapping etc
+hi! link vimBracket        BruvboxFg3        "<>
+hi! link vimMapMod         BruvboxFg3   "map brackets?
+" hi! link vimBracket        BruvboxOrange         "<>
+" hi! link vimMapMod         BruvboxOrange    "map brackets?
+
+hi! link vimParenSep       BruvboxFg4
+hi! link vimSep            BruvboxFg3
+hi! link vimLet            BruvboxBlueHue
+hi! link vimSetEqual       BruvboxFg1_h
+" hi! link vimSetSep         BruvboxFg3  "does nothing?
+hi! link vimUserCommand    BruvboxBlueNeutral  "tho really just why not same blue as rest?
+hi! link vimIsCommand      BruvboxFg0  "fg0_h showing horrible greenish hue suddnely, prob my monitor/angle but beware...  "BruvboxBlueHue
+" call s:HL('vimMapLhs',   s:none, s:none)  "nah ugly and useless
+" call s:HL('vimMapRhs',   s:none, s:bg1_s)
+hi! link vimFuncSID        BruvboxFg3
+hi! link vimUserFunc       BruvboxOrange "BruvboxFgHard "when called, should be orange somehow, to match regular ones. or swap those?
+hi! link vimFunction       BruvboxOrangeSign "BruvboxFgHard "when defined
+hi! link vimFuncName       BruvboxOrangeBold "built-in fns...
+" hi! link vimFuncBody  BruvboxFg1
+hi! link vimFuncVar        BruvboxRedSpecial
+" 
+hi! link vimContinue       BruvboxFg3
+hi! link vimGroup          BruvboxYellow
+hi! link vimHiGroup        BruvboxYellowSpecial
+
+hi! link vimSynError       Error
+
+" Tmux: {{{2
+
+" hi! link tmuxFormatString 
+" hi! link tmuxAction               Boolean
+" hi! link tmuxBoolean              Boolean
+" hi! link tmuxOptionValue          Constant
+" hi! link tmuxLayoutOptionValue    Constant
+" hi! link tmuxClientSessionCmds    Keyword
+" hi! link tmuxWindowPaneCmds       Keyword
+" hi! link tmuxBindingCmds          Keyword
+" hi! link tmuxEnvironmentCmds      Keyword
+" hi! link tmuxStatusLineCmds       Keyword
+" hi! link tmuxBufferCmds           Keyword
+" hi! link tmuxMiscCmds             Keyword
+" hi! link tmuxOptsSet              PreProc
+" hi! link tmuxUserOptsSet          Identifier
+" hi! link tmuxOptsSetw             PreProc
+" hi! link tmuxModeCmds             Keyword
+" hi! link tmuxKeySymbol            Special
+" hi! link tmuxSpecialCmds          Type
+" hi! link tmuxURL                  Underlined
+" hi! link tmuxKey                  Special
+" hi! link tmuxSelWindowOption      Number
+" hi! link tmuxOptions              Operator
+" hi! link tmuxVariable             Constant
+hi! link tmuxVariableExpansion    Character
+" hi! link tmuxAdditionalCommand    Special
+" hi! link tmuxKeyTable             PreProc
+hi! link tmuxColor                BruvboxBlueHue
+hi! link tmuxStyle                PreProc "Constant
+" hi! link tmuxPromptInpol          Special
+" hi! link tmuxDateInpol            Special
+
+hi! link tmuxFmtAlias             Special
+" hi! link tmuxFmtInpolDelimiter    Delimiter
+hi! link tmuxFmtInpolDelimiter    BruvboxRedHue
+hi! link tmuxFmtVariable          Identifier "Constant
+" hi! link tmuxFmtConditional       Conditional
+hi! link tmuxFmtLimit             Operator
+" hi! link tmuxFmtInpol            
+
+hi! link tmuxAttrInpolDelimiter   Delimiter
+" hi! link tmuxAttrInpolDelimiter   BruvboxYellowHue
+hi! link tmuxAttrBgFg             Macro
+" hi! link tmuxAttrEquals           Operator
+" hi! link tmuxAttrSeparator        Operator
+" hi! link tmuxAttrInpol           Type
+hi! link tmuxAttrInpol           Character
+" hi! link tmuxAttrInpol           BruvboxYellowSign
+
+" hi! link tmuxShellInpolDelimiter  Delimiter
+" hi! link tmuxShellInpol           String
+" hi! link tmuxStringDelimiter      Delimiter
+" hi! link tmuxString               String
 
 " Clojure: {{{2
 
 hi! link clojureKeyword      BruvboxBlue
-hi! link clojureCond         BruvboxOrange
-hi! link clojureSpecial      BruvboxOrange
-hi! link clojureDefine       BruvboxOrange
+hi! link clojureCond         BruvboxBlueHue
+hi! link clojureSpecial      BruvboxPurpleHue "BruvboxOrangeHue "def, let..
+hi! link clojureDefine       BruvboxPurpleSpecial  "BruvboxFgHard "BruvboxYellow "Special  "BruvboxRedHue "BruvboxOrangeSpecial "defn
+hi! link clojureFunc         BruvboxOrangeSign "Function "BruvboxYellow
+hi! link clojureMacro        Function "BruvboxOrangeSign "BruvboxRedHue "Aqua "BruvboxOrange
+"define syntax for functions! w/ side-effects?
+"and tint (functions?) red a la bool?
+"Number purp, "clojure.lang" / "java.lang" etc smthn
+hi! link clojureDispatch     BruvboxAquaSign "BruvboxFgHard  "BruvboxYellowBold "clojureSpecial "macro hash ting
+hi! link clojureAnonArg      BruvboxYellowBold "BruvboxYellowSign
 
-hi! link clojureFunc         BruvboxYellow
-hi! link clojureRepeat       BruvboxYellow
+hi! link clojureRepeat       BruvboxBlueSpecial "BruvboxYellowSpecial
 hi! link clojureCharacter    BruvboxAqua
-hi! link clojureStringEscape BruvboxAqua
-hi! link clojureException    BruvboxRed
+hi! link clojureConstant     BruvboxRedSpecial
+" hi! link clojureNumber       BruvboxPurple "default
+hi! link clojureStringEscape BruvboxAquaSign
+" hi! link clojureException    BruvboxRed
+hi! link clojureException    BruvboxRedNeutral
 
 hi! link clojureRegexp       BruvboxAqua
-hi! link clojureRegexpEscape BruvboxAqua
+hi! link clojureRegexpEscape BruvboxAquaHue
 call s:HL('clojureRegexpCharClass', s:fg3, s:none, s:bold)
 hi! link clojureRegexpMod        clojureRegexpCharClass
 hi! link clojureRegexpQuantifier clojureRegexpCharClass
 
-hi! link clojureParen        BruvboxFg3
-hi! link clojureAnonArg      BruvboxYellow
-hi! link clojureVariable     BruvboxBlue
-hi! link clojureMacro        BruvboxOrange
+hi! link clojureParen        BruvboxFg4
+hi! link clojureVarArg       BruvboxFgHard "BruvboxBlueHue
+hi! link clojureVariable     BruvboxRedHue  "BruvboxBlue
 
 hi! link clojureMeta         BruvboxYellow
-hi! link clojureDeref        BruvboxYellow
-hi! link clojureQuote        BruvboxYellow
-hi! link clojureUnquote      BruvboxYellow
+hi! link clojureDeref        BruvboxAqua "BruvboxFgHard  "BruvboxYellow
+hi! link clojureQuote        BruvboxGreenNeutral "YellowSpecial
+hi! link clojureUnquote      BruvboxAquaSpecial "YellowSign
+
+hi! link clojureStringDelimiter BruvboxGreenSymbol
+
+"tol specials
+hi! link clojureRecede       BruvboxFg3      "dashes, slashes, dots...
+hi! link clojureStandout     BruvboxFgHard   "#, !...
+hi! link clojureCommentDelimiter BruvboxBg3
 
 " C: {{{2
-hi! link cOperator BruvboxPurple
-hi! link cStructure BruvboxOrange
+hi! link cOperator           BruvboxPurple
+hi! link cStructure          BruvboxOrange
+hi! link cCustomParen        BruvboxFg4
+" hi! link cFloat              BruvboxPurpleBold
+" hi! link cCustomFunc         BruvboxOrangeHue
+" hi! link cCustomFunc         BruvboxRedHue
+" hi! link cCustomFunc         BruvboxRedSpecial
+hi! link cParen              BruvboxFg4
+" hi! link cPreProc            BruvboxAquaSpecial
+hi! link cIncluded           BruvboxAquaHue
+
+" C++: {{{2
+hi! link cStorageClass       BruvboxFg4
+hi! link cCustomClass        BruvboxPurpleHue
+" hi! link cCustomClassName    BruvboxPurpleHue "i like variation but guess makes sense keep yellowish...
+hi! link cCustomClassName    BruvboxYellowHue "i like variation but guess makes sense keep yellowish...
+hi! link cCustomClassKey     BruvboxPurpleHue
+hi! link cCustomMemVar       BruvboxOrangeNeutral
+
+" hi! link cppSTLFunction      BruvboxOrangeSign "think want something more differing
+hi! link cppSTLFunction      BruvboxOrangeBold "think want something more differing
+" hi! link cppSTLFunction      BruvboxOrangeInfo "think want something more differing
+hi! link cppSTLFunctional    BruvboxOrangeNeutral "Typedef, makes sense i guess
+hi! link cppSTLType          BruvboxYellowBold
+" bold is good tho should use more for more
+" hi! link cppSTLConstant      "nullptr etc
+" hi! link cppSTLNamespace     BruvboxPurpleHue
+hi! link cppSTLNamespace     BruvboxPurpleInfo
+hi! link cppType             BruvboxYellowNeutral   "bool
+
+" hi! link cppStructure        BruvboxAquaFadedBG   "default Structure. template, typename... ironically doesnt include struct.
+hi! link cppStructure        BruvboxAquaSpecial   "default Structure. template, typename... ironically doesnt include struct.
+
+" hi! link cppModifier         BruvboxYellowSpecial
+" hi! link cppModifier         BruvboxRedHue
+hi! link cppModifier         BruvboxRedInfo
+hi! link cppAccess           BruvboxBlueInfo
+hi! link cppStatement        BruvboxBlueBold "this, new etc
+hi! link cStatement          BruvboxBlueSpecial    "return, heh.
+hi! link cppCustomParen      BruvboxFg4
+hi! link cppParen            BruvboxFg2
+" hi! link cppOperator           BruvboxPurple
+"Custom in my syntax file. actual operators, +-=* yada
+hi! link cppSymbol         BruvboxFgHard
+" hi! link cBlock            BruvboxFgHard "que?
+hi! link cCustomPtr        BruvboxFg3
+hi! link cCustomDot        BruvboxFg3
+" recede and more is in my cpp syntax after...
+hi! link cppRecede         BruvboxFg4
+hi! link cppTernary        BruvboxBlueBold
+hi! link cCustomScope       BruvboxFg3       "dots between namespaces. fade out..
+hi! link cBitField         BruvboxFg2
+" hi! link cppPointerDeref     BruvboxFg4  "is already linked (straight to Fg4), but how??
+
 
 " Python: {{{2
 hi! link pythonBuiltin     BruvboxOrangeBold      "Sign
 hi! link pythonBuiltinObj  BruvboxOrangeNeutral
 hi! link pythonBuiltinFunc BruvboxOrangeSign
-hi! link pythonFunction    Function       "BruvboxBlue
-hi! link pythonDecorator   BruvboxRed
+hi! link pythonFunction    Function
+hi! link pythonDecorator   BruvboxRedHue
+hi! link pythonDottedName  Type
 hi! link pythonInclude     Include      "BruvboxAqua
-hi! link pythonImport      Include      "BruvboxAqua
+hi! link pythonImport      Define      "BruvboxAqua
 " hi! link pythonRun         BruvboxBlue
 " hi! link pythonCoding      BruvboxBlue
 " hi! link pythonOperator    BruvboxRedSpecial   "Identifier     "BruvboxRed
 call s:HL('pythonOperator',       s:fg2,      s:sign_column,    s:underline . s:bold)
 hi! link pythonExtraOperator    Operator  "BruvboxRed
-hi! link pythonExceptions  Exception               "BruvboxPurple
-hi! link pythonBoolean     Boolean        "BruvboxPurple
+hi! link pythonExceptions  Exception
 hi! link pythonDot         BruvboxFg3
 hi! link pythonComma       BruvboxFg3
 
+hi! link pythonRawString   BruvboxGreenInfo
+
 hi! link pythonBrackets    Special
-hi! link pythonBraces      Special   
-" hi! link pythonBraces         
+hi! link pythonBraces      Special
+" hi! link pythonBraces
 
 highlight! link pythonSelf BruvboxFg3   "not default
 
-" CSS: {{{2
-hi! link cssBraces               BruvboxBlue
-hi! link cssFunctionName         BruvboxYellow
-hi! link cssIdentifier           BruvboxOrange
-hi! link cssClassName            BruvboxGreen
-hi! link cssColor                BruvboxBlue
-hi! link cssSelectorOp           BruvboxBlue
-hi! link cssSelectorOp2          BruvboxBlue
-hi! link cssImportant            BruvboxGreen
-hi! link cssVendor               BruvboxFg1
+hi! link djangoModelField       BruvboxBlueHue "type
+hi! link djangoModelsModule     BruvboxFg3
+" hi! link djangoSettingsModule      
+" hi! link djangoQueryObject      Bruvbox "special
+hi! link djangoTagBlock     Special
+" hi! link djangoStatement     BruvboxFg3
 
-hi! link cssTextProp             BruvboxAqua
-hi! link cssAnimationProp        BruvboxAqua
-hi! link cssUIProp               BruvboxYellow
-hi! link cssTransformProp        BruvboxAqua
-hi! link cssTransitionProp       BruvboxAqua
-hi! link cssPrintProp            BruvboxAqua
-hi! link cssPositioningProp      BruvboxYellow
-hi! link cssBoxProp              BruvboxAqua
-hi! link cssFontDescriptorProp   BruvboxAqua
-hi! link cssFlexibleBoxProp      BruvboxAqua
-hi! link cssBorderOutlineProp    BruvboxAqua
-hi! link cssBackgroundProp       BruvboxAqua
-hi! link cssMarginProp           BruvboxAqua
-hi! link cssListProp             BruvboxAqua
-hi! link cssTableProp            BruvboxAqua
-hi! link cssFontProp             BruvboxAqua
-hi! link cssPaddingProp          BruvboxAqua
-hi! link cssDimensionProp        BruvboxAqua
-hi! link cssRenderProp           BruvboxAqua
-hi! link cssColorProp            BruvboxAqua
-hi! link cssGeneratedContentProp BruvboxAqua
+" CSS: {{{2
+
+" hi! link cssAtKeyword               
+hi! link cssBraces               BruvboxFg3
+hi! link cssFunctionName         Function
+hi! link cssAttrRegion           Function   "fns wrongly end up as this when args multiline?
+" hi! link cssIdentifier           BruvboxOrange
+hi! link cssClassName            BruvboxYellow
+" hi! link cssColor                BruvboxBlue
+" hi! link cssSelectorOp           BruvboxBlue
+" hi! link cssSelectorOp2          BruvboxBlue
+" hi! link cssImportant            BruvboxRedHue
+hi! link cssVendor               BruvboxFg4
+" hi! link cssValueNumber          Number
+
+hi! link cssCustomProp           Normal   "vars ending up w this group for some reason. white seems more reasonable since not used for shit hah
+
+" hi! link cssAnimationProp        BruvboxAqua
+" hi! link cssUIProp               BruvboxYellow
+hi! link cssUIAttr               BruvboxFg2
+" hi! link cssTransformProp        BruvboxAqua
+" hi! link cssTransitionProp       BruvboxAqua
+hi! link cssPositioningProp      BruvboxPurpleHue
+" hi! link cssBoxProp              BruvboxAqua
+hi! link cssFlexibleBoxProp      BruvboxBlueHue
+" hi! link cssBorderOutlineProp    BruvboxAqua
+" hi! link cssBackgroundProp       BruvboxAqua
+" hi! link cssMarginProp           BruvboxAqua
+" hi! link cssListProp             BruvboxAqua
+" hi! link cssTableProp            BruvboxAqua
+" hi! link cssFontProp             BruvboxAqua
+" hi! link cssFontDescriptorProp   BruvboxAqua
+" hi! link cssTextProp             BruvboxAqua
+" hi! link cssPrintProp            BruvboxAqua
+hi! link cssFontAttr             BruvboxFg2
+" hi! link cssPaddingProp          BruvboxAqua
+" hi! link cssDimensionProp        BruvboxAqua
+" hi! link cssRenderProp           BruvboxAqua
+" hi! link cssColorProp            BruvboxAqua
+hi! link cssColor            Normal "i mean should show the color uh..
+" hi! link cssGeneratedContentProp BruvboxAqua
 
 " JavaScript: {{{2
 
@@ -1337,10 +1652,15 @@ hi! link jsonString BruvboxFg1
 
 
 "}}}
+" GraphQL: {{{2
+hi! link graphqlVariable  BruvboxAqua
+hi! link graphqlType      BruvboxOrange
+hi! link graphqlBraces    BruvboxFg2
+"}}}
 "{{{1         Functions -------------------------------------------------------------------
 
 " what's the point of this and why the fuck is it down here and and huh. from gruvbox. nuke?
-"{{{2          Search Highlighting Cursor 
+"{{{2          Search Highlighting Cursor
 function! BruvboxHlsShowCursor()
   call s:HL('Cursor', s:bg0, s:hls_cursor)
 endfunction
