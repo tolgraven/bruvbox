@@ -56,12 +56,12 @@ let s:bb = {}  " setup palette dictionary
 "fg 								#32302f 	#a89984 	#bdae93 	#d5c4a1 	#ebdbb2 	#fbf1c7 	#fe8019
 "}}}
 " {{{2         DARK / LIGHT
-let s:bb.black       = ['#161515', 233]     "
-let s:bb.black2      = ['#181716', 233]     "
+let s:bb.black       = ['#111111', 233]     "
+let s:bb.black2      = ['#151414', 233]     "
 
 " need more variants down here lol.
-let s:bb.dark0_hard  = ['#181717', 234]     "
-let s:bb.dark0_hard2 = ['#212120', 234]     "
+let s:bb.dark0_hard  = ['#191818', 234]     "
+let s:bb.dark0_hard2 = ['#232222', 234]     "
 let s:bb.dark0       = ['#262525', 235]     " 282828 is orig gb dark0
 let s:bb.dark0_medium= ['#2a292b', 236]     "
 let s:bb.dark0_soft  = ['#2d3030', 236]     "
@@ -282,6 +282,7 @@ let g:bruvbox_internal  = s:bb
 
 
 "{{{1         Setup Emphasis:
+" should be opposite lol no
 let s:bold      = (g:bruvbox_bold      ? 'bold,'      : '')
 let s:italic    = (g:bruvbox_italic    ? 'italic,'    : '')
 let s:underline = (g:bruvbox_underline ? 'underline,' : '')
@@ -467,7 +468,7 @@ let s:vert_split           = get(s:,   get(g:, 'bruvbox_vert_split',     'bg0_h'
 let s:invert_signs         = (get(g:, 'bruvbox_invert_signs',     0) == 1 ? s:inverse  : '')
 let s:invert_selection     = (get(g:, 'bruvbox_invert_selection', 1) == 1 ? s:inverse  : '')
 " let s:invert_search        = (get(g:, 'bruvbox_invert_search',    1) == 1 ? s:inverse  : '')
-let s:invert_tabline       = (get(g:, 'bruvbox_invert_tabline',   0) == 1 ? s:inverse  : '')
+let s:invert_tabline       = (get(g:, 'bruvbox_invert_tabline',   1) == 1 ? s:inverse  : '')
 let s:invert_errors        = (get(g:, 'bruvbox_invert_errors',    0) == 1 ? s:inverse  : '')
 "for motion/search/jump plugs
 let s:invert_targets       =  get(g:, 'bruvbox_invert_targets_when_rest_faded',  0)
@@ -571,14 +572,14 @@ call s:HL('BruvboxOrangeFadedBg',    s:bb.dark0,       s:bb.faded_orange,  s:bol
 " call s:HL('BruvboxOrangeFadedBg',    s:bb.dark0,       s:bb.faded_orange,  s:bold)
 
 " for sign column, also other minor standout highlights since sign column (by default anyways) has light bg than Normal
-call s:HL('BruvboxRedSign',        s:red,            s:sign_column,      s:invert_signs)
-call s:HL('BruvboxGreenSign',      s:green,          s:sign_column,      s:invert_signs)
-call s:HL('BruvboxYellowSign',     s:yellow,         s:sign_column,      s:invert_signs)
-call s:HL('BruvboxBlueSign',       s:blue,           s:sign_column,      s:invert_signs)
-call s:HL('BruvboxPurpleSign',     s:purple,         s:sign_column,      s:invert_signs)
-call s:HL('BruvboxAquaSign',       s:aqua,           s:sign_column,      s:invert_signs)
-call s:HL('BruvboxOrangeSign',     s:orange,         s:sign_column,      s:invert_signs)
-call s:HL('BruvboxFgSign',         s:fg_hard,        s:sign_column,      s:invert_signs)
+call s:HL('BruvboxRedSign',        s:red,            s:sign_column,      s:invert_signs . s:bold)
+call s:HL('BruvboxGreenSign',      s:green,          s:sign_column,      s:invert_signs . s:bold)
+call s:HL('BruvboxYellowSign',     s:yellow,         s:sign_column,      s:invert_signs . s:bold)
+call s:HL('BruvboxBlueSign',       s:blue,           s:sign_column,      s:invert_signs . s:bold)
+call s:HL('BruvboxPurpleSign',     s:purple,         s:sign_column,      s:invert_signs . s:bold)
+call s:HL('BruvboxAquaSign',       s:aqua,           s:sign_column,      s:invert_signs . s:bold)
+call s:HL('BruvboxOrangeSign',     s:orange,         s:sign_column,      s:invert_signs . s:bold)
+call s:HL('BruvboxFgSign',         s:fg_hard,        s:sign_column,      s:invert_signs . s:bold)
 
 " alt sign. fixup faded tho
 call s:HL('BruvboxRedSignFaded',        s:bb.faded_red,          s:sign_column,      s:invert_signs)
@@ -591,14 +592,14 @@ call s:HL('BruvboxOrangeSignFaded',     s:bb.faded_orange,       s:sign_column, 
 
 " light-ish background, text regular. prob should make sure it's not fully the
 " same as any other bg color, so it will always stand out at least a bit...
-call s:HL('BruvboxRedInfo',        s:red,            s:bg1_h,            s:italic)
-call s:HL('BruvboxGreenInfo',      s:green,          s:bg1_h,            s:italic)
-call s:HL('BruvboxYellowInfo',     s:yellow,         s:bg1_h,            s:italic)
-call s:HL('BruvboxBlueInfo',       s:blue,           s:bg1_h,            s:italic)
-call s:HL('BruvboxPurpleInfo',     s:purple,         s:bg1_h,            s:italic)
-call s:HL('BruvboxAquaInfo',       s:aqua,           s:bg1_h,            s:italic)
-call s:HL('BruvboxOrangeInfo',     s:orange,         s:bg1_h,            s:italic)
-call s:HL('BruvboxFgInfo',         s:fg_hard,        s:bg1,              s:italic)
+call s:HL('BruvboxRedInfo',        s:red,            s:bg1_h,            s:bold . s:italic)
+call s:HL('BruvboxGreenInfo',      s:green,          s:bg1_h,            s:bold . s:italic)
+call s:HL('BruvboxYellowInfo',     s:yellow,         s:bg1_h,            s:bold . s:italic)
+call s:HL('BruvboxBlueInfo',       s:blue,           s:bg1_h,            s:bold . s:italic)
+call s:HL('BruvboxPurpleInfo',     s:purple,         s:bg1_h,            s:bold . s:italic)
+call s:HL('BruvboxAquaInfo',       s:aqua,           s:bg1_h,            s:bold . s:italic)
+call s:HL('BruvboxOrangeInfo',     s:orange,         s:bg1_h,            s:bold . s:italic)
+call s:HL('BruvboxFgInfo',         s:fg_hard,        s:bg1,              s:bold . s:italic)
 
 " faint as fuck, bg only, text must be proper white/black
 call s:HL('BruvboxRedBg',          s:none,      s:bg_red      )
@@ -632,6 +633,29 @@ call s:HL('BruvboxInsertModeColor', s:color_mode_insert,   s:color_column, s:bol
 call s:HL('BruvboxVisualModeColor', s:color_mode_visual,   s:color_column, s:bold)
 call s:HL('BruvboxCursorLineNr',    s:color_mode_normal,   s:color_column, s:bold)
 
+" background/undercurl highlighting
+" call s:HL('BruvboxErrorUndercurl',   s:none, s:bg_red,    s:undercurl, s:red)
+" call s:HL('BruvboxWarningUndercurl', s:none, s:bg_yellow, s:undercurl, s:yellow)
+" call s:HL('BruvboxInfoUndercurl',    s:none, s:bg_green,  s:undercurl, s:green)
+" call s:HL('BruvboxHintUndercurl',    s:none, s:bg_blue,   s:undercurl, s:blue)
+" do have undercurl working in Kitty. And set fixed in tmux yet not showing up (same w italics)
+" hi BruvboxErrorUndercurl      cterm=undercurl ctermbg=NONE guisp=s:red
+" hi BruvboxWarningUndercurl    cterm=undercurl ctermbg=NONE guisp=s:yellow
+" hi BruvboxInfoUndercurl       cterm=undercurl ctermbg=NONE guisp=s:green
+" hi BruvboxHintUndercurl       cterm=undercurl ctermbg=NONE guisp=s:blue
+call s:HL('BruvboxErrorUndercurl',   s:fg3, s:none,  s:undercurl, s:red)
+call s:HL('BruvboxWarningUndercurl', s:fg3, s:none,  s:undercurl, s:yellow)
+call s:HL('BruvboxInfoUndercurl',    s:fg3, s:none,  s:undercurl, s:green)
+call s:HL('BruvboxHintUndercurl',    s:fg3, s:none,  s:undercurl, s:blue)
+hi! link BruvboxSignAdd             BruvboxGreenSign
+hi! link BruvboxSignChange          BruvboxAquaSign
+hi! link BruvboxSignDelete          BruvboxRedSign
+hi! link BruvboxSignChangeDelete    BruvboxOrangeSign
+
+hi! link BruvboxSignError           BruvboxRedSign
+hi! link BruvboxSignWarning         BruvboxYellowSign
+hi! link BruvboxSignInfo            BruvboxFgSign
+hi! link BruvboxSignHint            BruvboxBlueSign
 " }}}
 
 
@@ -641,7 +665,8 @@ call s:HL('BruvboxCursorLineNr',    s:color_mode_normal,   s:color_column, s:bol
 call s:HL('Normal',         s:fg0_s,            s:bg0)  " got errors when not defining both fg and bg for normal. Undef bg seems better for neovim though, from reading through issues. Check that gruvbox PR allowing this.
 if s:is_dark | set background=dark   | else | set background=light    | endif   "workaround for vim being a shithead
 
-call s:HL('CursorLine',     s:none,           s:cursorline_bg)
+call s:HL('CursorLine',     s:none,           s:cursorline_bg, s:bold)
+call s:HL('CursorLineInvert', s:none,         s:bb.bg_dark_purple)
 hi!  link  CursorColumn     CursorLine
 " below aint working, dunno why... so augroup still in vimrc for now.
 if s:underline_cursorline == 1
@@ -653,7 +678,7 @@ endif
 
 call s:HL('TabLineFill',    s:fg4,            s:bg0_h,          s:invert_tabline)
 call s:HL('TabLineSel',     s:vim_bg,         s:bg4,            s:bold . s:invert_tabline)
-call s:HL('TabLine',        s:fg4,            s:bg0_m)
+call s:HL('TabLine',        s:fg4,            s:bg0_m,          s:invert_tabline)
 
 call s:HL('QuickFixLine',   s:vim_fg,         s:vim_bg,         s:underline)
 
@@ -692,9 +717,9 @@ hi! link   MatchParen       Visual
 
 hi! link   Directory        BruvboxBlueSign  "BruvboxBlueSpecial    " Directory names, special names in listing
 hi! link   Title            BruvboxPurpleSign     " Titles for output from :set all, :autocmd, etc.
-hi! link   ErrorMsg         BruvboxRedSign
-hi! link   WarningMsg       BruvboxYellowSign    "BruvboxYellowNeutral
-hi! link   Question         BruvboxYellowInfo     " 'Press enter' prompt and yes/no questions
+hi! link   ErrorMsg         BruvboxRedInfo        "BruvboxRedSign
+hi! link   WarningMsg       BruvboxYellowInfo     "BruvboxYellowSign    "BruvboxYellowNeutral
+hi! link   Question         BruvboxYellowSign     " 'Press enter' prompt and yes/no questions
 hi! link   MoreMsg          BruvboxFg4            " More prompt: -- More --
 hi! link   ModeMsg          BruvboxFg2            " Current mode message: -- INSERT --
 
@@ -765,6 +790,10 @@ call s:HL('String',         s:green,         s:none,               s:italicize_s
 call s:HL('Comment',        s:gray,          s:none,               s:italicize_comments)
 
 " {{{1        Completion:
+" XXX doesnt work with light bg
+if s:invert_targets == 0 | call s:HL('JumpTarget',  s:bb.special_blue,  s:bg_hard,    s:bold)
+else                     | call s:HL('JumpTarget',  s:fg0_h,            s:bb.faded_blue)    | endif
+
 " call s:HL('Pmenu',          s:fg1,           s:cursorline_bg)     " Popup menu: normal item, makes sense to link bg to whatever used for CursorLine, so drops down smoothly :)
 call s:HL('Pmenu',          s:fg1,           s:bg1_s)     " Popup menu: normal item, makes sense to link bg to whatever used for CursorLine, so drops down smoothly :)
 call s:HL('PmenuSel',       s:fg0,           s:neutral_blue,       s:bold)  " selected item     s:bg0_s, s:blue
@@ -790,6 +819,20 @@ if has('spell')
 endif
 " }}}
 
+"{{{1         Diagnostic:
+" hi! link   DiagnosticHint    BruvboxFg4
+hi! link DiagnosticUnderlineError    BruvboxErrorUndercurl
+hi! link DiagnosticUnderlineWarning  BruvboxWarningUndercurl
+hi! link DiagnosticUnderlineInfo     BruvboxInfoUndercurl
+hi! link DiagnosticUnderlineHint     BruvboxHintUndercurl
+hi! link DiagnosticError    BruvboxRedSign
+hi! link DiagnosticWarning  BruvboxYellowSign
+hi! link DiagnosticInfo     BruvboxFgSign
+hi! link DiagnosticHint     BruvboxBlueSign
+
+hi! link FloatBorder                 BruvboxBg4
+call s:HL('NormalFloat', s:fg0_s, s:bg0_m) " Normal text in floating windows
+" }}}
 "{{{1         Neovim Terminal Colors:
 if has('nvim')
   " couple of these are repeating now since yellow is already defined as special_yellow etc, fix
@@ -819,9 +862,28 @@ endif
 
 
 
-"{{{1 Plugin specific -------------------------------------------------------------
 
 hi! link ExtraWhitespace BruvboxRedBg
+
+
+"{{{1 Plugin specific -------------------------------------------------------------
+
+
+"{{{2          Lsp
+" hi @lsp.type.class      guifg=Aqua
+" hi @lsp.type.function   guifg=Yellow
+" hi @lsp.type.method     guifg=Green
+" hi @lsp.type.parameter  guifg=Purple
+hi link @lsp.type.variable         BruvboxFgSign
+" hi @lsp.type.property   guifg=Green
+
+" hi @lsp.typemod.function.classScope  guifg=Orange
+" hi @lsp.typemod.variable.classScope  guifg=Orange
+" hi @lsp.typemod.variable.fileScope   guifg=Orange
+" hi @lsp.typemod.variable.globalScope guifg=Red
+" hi link @lsp.typemod.variable.
+hi link @lsp.typemod.function.async BruvboxBlueSignFaded " async functions are blue
+
 "{{{2          ColDevIcons test
 
 let g:coldevicons_colormap = {
@@ -846,31 +908,122 @@ let g:coldevicons_colormap = {
 " FIX:    FZF,    Denite
 
 " jump plugin group def
-" XXX doesnt work with light bg
-if s:invert_targets == 0 | call s:HL('JumpTarget',  s:bb.special_blue,  s:bg_hard,    s:bold)
-else                     | call s:HL('JumpTarget',  s:fg0_h,            s:bb.faded_blue)    | endif
+"{{{2         Nvim general subtypes/Treesitter:
+"@variable                       various variable names
+"@variable.builtin               built-in variable names (e.g. `this`, `self`)
+"@variable.parameter             parameters of a function
+"@variable.parameter.builtin     special parameters (e.g. `_`, `it`)
+"@variable.member                object and struct fields
+"
+"@constant               constant identifiers
+"@constant.builtin       built-in constant values
+"@constant.macro         constants defined by the preprocessor
+"
+"@module                 modules or namespaces
+"@module.builtin         built-in modules or namespaces
+"@label                  `GOTO` and other labels (e.g. `label:` in C), including heredoc labels
+"
+"@string                 string literals
+"@string.documentation   string documenting code (e.g. Python docstrings)
+"@string.regexp          regular expressions
+"@string.escape          escape sequences
+"@string.special         other special strings (e.g. dates)
+"@string.special.symbol  symbols or atoms
+"@string.special.path    filenames
+"@string.special.url     URIs (e.g. hyperlinks)
+"
+"@character              character literals
+"@character.special      special characters (e.g. wildcards)
+"
+"@boolean                boolean literals
+"@number                 numeric literals
+"@number.float           floating-point number literals
+"
+"@type                   type or class definitions and annotations
+"@type.builtin           built-in types
+"@type.definition        identifiers in type definitions (e.g. `typedef <type> <identifier>` in C)
+"
+"@attribute              attribute annotations (e.g. Python decorators, Rust lifetimes)
+"@attribute.builtin      builtin annotations (e.g. `@property` in Python)
+"@property               the key in key/value pairs
+"
+"@function               function definitions
+"@function.builtin       built-in functions
+"@function.call          function calls
+"@function.macro         preprocessor macros
+"
+"@function.method        method definitions
+"@function.method.call   method calls
+"
+"@constructor            constructor calls and definitions
+"@operator               symbolic operators (e.g. `+`, `*`)
+"
+"@keyword                keywords not fitting into specific categories
+"@keyword.coroutine      keywords related to coroutines (e.g. `go` in Go, `async/await` in Python)
+"@keyword.function       keywords that define a function (e.g. `func` in Go, `def` in Python)
+"@keyword.operator       operators that are English words (e.g. `and`, `or`)
+"@keyword.import         keywords for including or exporting modules (e.g. `import`, `from` in Python)
+"@keyword.type           keywords describing namespaces and composite types (e.g. `struct`, `enum`)
+"@keyword.modifier       keywords modifying other constructs (e.g. `const`, `static`, `public`)
+"@keyword.repeat         keywords related to loops (e.g. `for`, `while`)
+"@keyword.return         keywords like `return` and `yield`
+"@keyword.debug          keywords related to debugging
+"@keyword.exception      keywords related to exceptions (e.g. `throw`, `catch`)
+"
+"@keyword.conditional         keywords related to conditionals (e.g. `if`, `else`)
+"@keyword.conditional.ternary ternary operator (e.g. `?`, `:`)
+"
+"@keyword.directive           various preprocessor directives and shebangs
+"@keyword.directive.define    preprocessor definition directives
+"
+"@punctuation.delimiter  delimiters (e.g. `;`, `.`, `,`)
+"@punctuation.bracket    brackets (e.g. `()`, `{}`, `[]`)
+"@punctuation.special    special symbols (e.g. `{}` in string interpolation)
+"
+"@comment                line and block comments
+"@comment.documentation  comments documenting code
+"
+"@comment.error          error-type comments (e.g. `ERROR`, `FIXME`, `DEPRECATED`)
+"@comment.warning        warning-type comments (e.g. `WARNING`, `FIX`, `HACK`)
+"@comment.todo           todo-type comments (e.g. `TODO`, `WIP`)
+"@comment.note           note-type comments (e.g. `NOTE`, `INFO`, `XXX`)
+"
+"@markup.strong          bold text
+"@markup.italic          italic text
+"@markup.strikethrough   struck-through text
+"@markup.underline       underlined text (only for literal underline markup!)
+"
+"@markup.heading         headings, titles (including markers)
+"@markup.heading.1       top-level heading
+"@markup.heading.2       section heading
+"@markup.heading.3       subsection heading
+"@markup.heading.4       and so on
+"@markup.heading.5       and so forth
+"@markup.heading.6       six levels ought to be enough for anybody
+"
+"@markup.quote           block quotes
+"@markup.math            math environments (e.g. `$ ... $` in LaTeX)
+"
+"@markup.link            text references, footnotes, citations, etc.
+"@markup.link.label      link, reference descriptions
+"@markup.link.url        URL-style links
+"
+"@markup.raw             literal or verbatim text (e.g. inline code)
+"@markup.raw.block       literal or verbatim text as a stand-alone block
+"
+"@markup.list            list markers
+"@markup.list.checked    checked todo-style list markers
+"@markup.list.unchecked  unchecked todo-style list markers
+"
+"@diff.plus              added text (for diff files)
+"@diff.minus             deleted text (for diff files)
+"@diff.delta             changed text (for diff files)
+"
+"@tag                    XML-style tag names (e.g. in XML, HTML, etc.)
+"@tag.builtin            builtin tag names (e.g. HTML5 tags)
+"@tag.attribute          XML-style tag attributes
+"@tag.delimiter          XML-style tag delimiters
 
-" background/undercurl highlighting
-" call s:HL('BruvboxErrorUndercurl',   s:none, s:bg_red,    s:undercurl, s:red)
-" call s:HL('BruvboxWarningUndercurl', s:none, s:bg_yellow, s:undercurl, s:yellow)
-" call s:HL('BruvboxInfoUndercurl',    s:none, s:bg_green,  s:undercurl, s:green)
-" call s:HL('BruvboxHintUndercurl',    s:none, s:bg_blue,   s:undercurl, s:blue)
-" do have undercurl working in Kitty. And set fixed in tmux yet not showing up (same w italics)
-call s:HL('BruvboxErrorUndercurl',   s:none, s:none,  s:undercurl, s:red)
-call s:HL('BruvboxWarningUndercurl', s:none, s:none,  s:undercurl, s:yellow)
-call s:HL('BruvboxInfoUndercurl',    s:none, s:none,  s:undercurl, s:green)
-call s:HL('BruvboxHintUndercurl',    s:none, s:none,  s:undercurl, s:blue)
-hi! link BruvboxSignAdd             BruvboxGreenSign
-hi! link BruvboxSignChange          BruvboxAquaSign
-hi! link BruvboxSignDelete          BruvboxRedSign
-hi! link BruvboxSignChangeDelete    BruvboxOrangeSign
-
-hi! link BruvboxSignError           BruvboxRedSign
-hi! link BruvboxSignWarning         BruvboxYellowSign
-hi! link BruvboxSignInfo            BruvboxFgSign
-hi! link BruvboxSignHint            BruvboxBlueSign
-
-"{{{2         Nvim general subtypes:
 
 
 "{{{2         ChooseWin:
@@ -937,7 +1090,7 @@ hi! link GitGutterAdd           BruvboxGreenSign
 hi! link GitGutterChange        BruvboxAquaSign
 hi! link GitGutterDelete        BruvboxRedSign
 hi! link GitGutterChangeDelete  BruvboxOrangeSign
-""{{{2        GitCommit:
+"{{{2        GitCommit:
 hi! link gitcommitSelectedFile  BruvboxGreen
 hi! link gitcommitDiscardedFile BruvboxRed
 "{{{2         Signify:
@@ -973,16 +1126,44 @@ hi! link CocHintSign           BruvboxSignHint
 hi! link CocHintFloat          BruvboxBlueSpecial
 hi! link CocHintVirtualText    BruvboxSignHint
 
-" hi! link CocCodeLens           BruvboxFg4
-hi! link CocCodeLens           BruvboxGray
+hi! link CocCodeLens           BruvboxPurpleSignFaded
+" hi! link CocCodeLens           BruvboxGray
 
-call s:HL('CocFloating',        s:fg1_h,  s:bg1_s)
+call s:HL('CocFloating',        s:fg3,  s:bg0_h)
+call s:HL('CocFloatingBorder',  s:red,  s:bg0_m)
+call s:HL('BruvboxBg4Line',     s:none,    s:bg0_h)
+call s:HL('None',     s:none,    s:none)
+
 
 hi! link CocGitAddedSign            BruvboxGreenSign 
 hi! link CocGitChangeRemovedSign    BruvboxAquaSign  
 hi! link CocGitChangedSign          BruvboxOrangeSign 
 hi! link CocGitRemovedSign          BruvboxRedSign    
 " hi! link CocGitTopRemovedSign       
+
+
+hi! link CocSem_namespace       BruvboxPurpleHue
+hi! link CocSem_type            Type
+hi! link CocSem_class           BruvboxYellowHue
+hi! link CocSem_enum            Type
+hi! link CocSem_interface       Type
+hi! link CocSem_struct          Structure
+hi! link CocSem_typeParameter   Type
+hi! link CocSem_parameter       Normal
+hi! link CocSem_variable        Normal
+hi! link CocSem_property        Normal
+hi! link CocSem_enumMember      Constant
+hi! link CocSem_event           Identifier
+hi! link CocSem_function        Function
+hi! link CocSem_method          Function
+hi! link CocSem_macro           Macro
+hi! link CocSem_keyword         Keyword
+hi! link CocSem_modifier        StorageClass
+hi! link CocSem_comment         Comment
+hi! link CocSem_string          String
+hi! link CocSem_number          Number
+hi! link CocSem_regexp          Normal
+hi! link CocSem_operator        Operator
 
 "{{{2         Syntastic:
 hi! link SyntasticError       ALEError
@@ -1254,6 +1435,7 @@ hi! link tmuxAttrInpol           Character
 
 " Clojure: {{{2
 
+hi! link clojureSymbol       BruvboxFg0
 hi! link clojureKeyword      BruvboxBlue
 hi! link clojureCond         BruvboxBlueHue
 hi! link clojureSpecial      BruvboxPurpleHue "BruvboxOrangeHue "def, let..
@@ -1295,6 +1477,55 @@ hi! link clojureStringDelimiter BruvboxGreenSymbol
 hi! link clojureRecede       BruvboxFg3      "dashes, slashes, dots...
 hi! link clojureStandout     BruvboxFgHard   "#, !...
 hi! link clojureCommentDelimiter BruvboxBg3
+
+
+" Fennel: {{{2
+
+hi! link fennelSymbol       BruvboxFg0
+hi! link fennelIdentifier   BruvboxFg0
+hi! link fennelSpecialForm  BruvboxPurpleHue
+hi! link fennelKeyword      BruvboxBlue
+hi! link fennelCond         BruvboxBlueHue
+hi! link fennelSpecial      BruvboxPurpleHue "BruvboxOrangeHue "def, let..
+hi! link fennelDefine       BruvboxPurpleSpecial  "BruvboxFgHard "BruvboxYellow "Special  "BruvboxRedHue "BruvboxOrangeSpecial "defn
+hi! link fennelFunc         BruvboxOrangeSign "Function "BruvboxYellow
+hi! link fennelMacro        Function "BruvboxOrangeSign "BruvboxRedHue "Aqua "BruvboxOrange
+"define sfennelor functions! w/ side-effects?
+"and tintfennelions?) red a la bool?
+"Number pfennellojure.lang" / "java.lang" etc smthn
+hi! link fennelDispatch     BruvboxAquaSign "BruvboxFgHard  "BruvboxYellowBold "clojureSpecial "macro hash ting
+hi! link fennelAnonArg      BruvboxYellowBold "BruvboxYellowSign
+
+hi! link fennelRepeat       BruvboxBlueSpecial "BruvboxYellowSpecial
+hi! link fennelCharacter    BruvboxAqua
+hi! link fennelConstant     BruvboxRedSpecial
+" hi! linfennelreNumber       BruvboxPurple "default
+hi! link fennelStringEscape BruvboxAquaSign
+" hi! linfennelreException    BruvboxRed
+hi! link fennelException    BruvboxRedNeutral
+
+hi! link fennelRegexp       BruvboxAqua
+hi! link fennelRegexpEscape BruvboxAquaHue
+call s:HL('fennelRegexpCharClass', s:fg3, s:none, s:bold)
+hi! link fennelRegexpMod        clojureRegexpCharClass
+hi! link fennelRegexpQuantifier clojureRegexpCharClass
+
+hi! link fennelParen        BruvboxFg4
+hi! link fennelVarArg       BruvboxFgHard "BruvboxBlueHue
+hi! link fennelVariable     BruvboxRedHue  "BruvboxBlue
+
+hi! link fennelMeta         BruvboxYellow
+hi! link fennelDeref        BruvboxAqua "BruvboxFgHard  "BruvboxYellow
+hi! link fennelQuote        BruvboxGreenNeutral "YellowSpecial
+hi! link fennelUnquote      BruvboxAquaSpecial "YellowSign
+
+hi! link fennelStringDelimiter BruvboxGreenSymbol
+
+"tol specfennel
+hi! link fennelRecede       BruvboxFg3      "dashes, slashes, dots...
+hi! link fennelStandout     BruvboxFgHard   "#, !...
+hi! link fennelCommentDelimiter BruvboxBg3
+
 
 " C: {{{2
 hi! link cOperator           BruvboxPurple
@@ -1342,8 +1573,8 @@ hi! link cppParen            BruvboxFg2
 "Custom in my syntax file. actual operators, +-=* yada
 hi! link cppSymbol         BruvboxFgHard
 " hi! link cBlock            BruvboxFgHard "que?
-hi! link cCustomPtr        BruvboxFg3
-hi! link cCustomDot        BruvboxFg3
+hi! link cCustomPtr        BruvboxFg4
+hi! link cCustomDot        BruvboxFg4
 " recede and more is in my cpp syntax after...
 hi! link cppRecede         BruvboxFg4
 hi! link cppTernary        BruvboxBlueBold
@@ -1393,12 +1624,19 @@ hi! link cssFunctionName         Function
 hi! link cssAttrRegion           Function   "fns wrongly end up as this when args multiline?
 " hi! link cssIdentifier           BruvboxOrange
 hi! link cssClassName            BruvboxYellow
+hi! link cssPseudoClass          BruvboxBlueInfo
 " hi! link cssColor                BruvboxBlue
 " hi! link cssSelectorOp           BruvboxBlue
 " hi! link cssSelectorOp2          BruvboxBlue
 " hi! link cssImportant            BruvboxRedHue
 hi! link cssVendor               BruvboxFg4
+ 
+hi! link cssUnitDecorators       BruvboxBlueHue
+
 " hi! link cssValueNumber          Number
+" hi! link cssValueLength          BruvboxBlueSpecial
+" hi! link cssValueTime            BruvboxPurpleSpecial
+hi! link cssValueAngle           Number
 
 hi! link cssCustomProp           Normal   "vars ending up w this group for some reason. white seems more reasonable since not used for shit hah
 
@@ -1657,6 +1895,9 @@ hi! link graphqlVariable  BruvboxAqua
 hi! link graphqlType      BruvboxOrange
 hi! link graphqlBraces    BruvboxFg2
 "}}}
+
+hi! link CopilotSuggestion BruvboxBg3
+
 "{{{1         Functions -------------------------------------------------------------------
 
 " what's the point of this and why the fuck is it down here and and huh. from gruvbox. nuke?
