@@ -120,7 +120,7 @@ let s:bb.bright_aqua      = ['#91b8a4', 108]
 let s:bb.bright_orange    = ['#cca687', 208]  
 
 let s:bb.neutral_red      = ['#d76b69', 124] "
-let s:bb.neutral_green    = ['#919545', 106] "
+let s:bb.neutral_green    = ['#91855a', 106] "
 let s:bb.neutral_yellow   = ['#d9a961', 172] "
 let s:bb.neutral_blue     = ['#458588', 66]  "
 let s:bb.neutral_blue_alt = ['#4d8487', 66]  "
@@ -137,7 +137,7 @@ let s:bb.faded_aqua       = ['#3a5853', 66]  "
 let s:bb.faded_orange     = ['#99613c', 130] "
 " bright, desat
 let s:bb.special_red      = ['#af7370', 124] "
-let s:bb.special_green    = ['#8b8c63', 10]  "
+let s:bb.special_green    = ['#8e8c73', 10]  "
 let s:bb.special_yellow   = ['#d0af80', 11]  "
 let s:bb.special_blue     = ['#80a0b3', 111] "
 let s:bb.special_purple   = ['#af8589', 172] "
@@ -523,6 +523,9 @@ call s:HL('BruvboxFg3',  s:fg3)  | call s:HL('BruvboxFg4',   s:fg4)
 call s:HL('BruvboxGray', s:gray) | call s:HL('BruvboxGray2', s:gray2)
 call s:HL('BruvboxBrightGray',     s:bb.bright_gray)
 call s:HL('BruvboxBgHard',         s:none,        s:bg_hard)
+call s:HL('BruvboxFg0Bold',        s:fg0,         s:none,           s:bold)
+call s:HL('BruvboxFg1Underline',   s:fg1,         s:none,           s:underline)
+call s:HL('BruvboxFg3Underline',   s:fg3,         s:none,           s:underline)
 call s:HL('BruvboxFgHard',         s:fg_hard,     s:none,           s:bold)
 call s:HL('BruvboxHardOnHard',     s:fg_hard,     s:bg_hard)
 
@@ -762,7 +765,7 @@ hi! link   Operator         BruvboxFgHard            " sizeof, "+", "*", etc.
 " hi! link   Delimiter        BruvboxFg2
 hi! link   Delimiter        BruvboxOrangeSign
 
-hi! link   Identifier       BruvboxRed              " Variable name
+hi! link   Identifier       BruvboxFg2              " Variable name
 hi! link   Function         BruvboxOrangeSpecial
 " call s:HL('Function',       s:bb.bright_orange,  s:none,  s:bold)
 " call s:HL('Function',       s:bb.bright_orange,  s:none)
@@ -909,120 +912,120 @@ let g:coldevicons_colormap = {
 
 " jump plugin group def
 "{{{2         Nvim general subtypes/Treesitter:
-"@variable                       various variable names
-"@variable.builtin               built-in variable names (e.g. `this`, `self`)
-"@variable.parameter             parameters of a function
-"@variable.parameter.builtin     special parameters (e.g. `_`, `it`)
-"@variable.member                object and struct fields
-"
-"@constant               constant identifiers
-"@constant.builtin       built-in constant values
-"@constant.macro         constants defined by the preprocessor
-"
-"@module                 modules or namespaces
-"@module.builtin         built-in modules or namespaces
-"@label                  `GOTO` and other labels (e.g. `label:` in C), including heredoc labels
-"
-"@string                 string literals
-"@string.documentation   string documenting code (e.g. Python docstrings)
-"@string.regexp          regular expressions
-"@string.escape          escape sequences
-"@string.special         other special strings (e.g. dates)
-"@string.special.symbol  symbols or atoms
-"@string.special.path    filenames
-"@string.special.url     URIs (e.g. hyperlinks)
-"
-"@character              character literals
-"@character.special      special characters (e.g. wildcards)
-"
-"@boolean                boolean literals
-"@number                 numeric literals
-"@number.float           floating-point number literals
-"
-"@type                   type or class definitions and annotations
-"@type.builtin           built-in types
-"@type.definition        identifiers in type definitions (e.g. `typedef <type> <identifier>` in C)
-"
-"@attribute              attribute annotations (e.g. Python decorators, Rust lifetimes)
-"@attribute.builtin      builtin annotations (e.g. `@property` in Python)
-"@property               the key in key/value pairs
-"
-"@function               function definitions
-"@function.builtin       built-in functions
-"@function.call          function calls
-"@function.macro         preprocessor macros
-"
-"@function.method        method definitions
-"@function.method.call   method calls
-"
-"@constructor            constructor calls and definitions
-"@operator               symbolic operators (e.g. `+`, `*`)
-"
-"@keyword                keywords not fitting into specific categories
-"@keyword.coroutine      keywords related to coroutines (e.g. `go` in Go, `async/await` in Python)
-"@keyword.function       keywords that define a function (e.g. `func` in Go, `def` in Python)
-"@keyword.operator       operators that are English words (e.g. `and`, `or`)
-"@keyword.import         keywords for including or exporting modules (e.g. `import`, `from` in Python)
-"@keyword.type           keywords describing namespaces and composite types (e.g. `struct`, `enum`)
-"@keyword.modifier       keywords modifying other constructs (e.g. `const`, `static`, `public`)
-"@keyword.repeat         keywords related to loops (e.g. `for`, `while`)
-"@keyword.return         keywords like `return` and `yield`
-"@keyword.debug          keywords related to debugging
-"@keyword.exception      keywords related to exceptions (e.g. `throw`, `catch`)
-"
-"@keyword.conditional         keywords related to conditionals (e.g. `if`, `else`)
-"@keyword.conditional.ternary ternary operator (e.g. `?`, `:`)
-"
-"@keyword.directive           various preprocessor directives and shebangs
-"@keyword.directive.define    preprocessor definition directives
-"
-"@punctuation.delimiter  delimiters (e.g. `;`, `.`, `,`)
-"@punctuation.bracket    brackets (e.g. `()`, `{}`, `[]`)
-"@punctuation.special    special symbols (e.g. `{}` in string interpolation)
-"
-"@comment                line and block comments
-"@comment.documentation  comments documenting code
-"
-"@comment.error          error-type comments (e.g. `ERROR`, `FIXME`, `DEPRECATED`)
-"@comment.warning        warning-type comments (e.g. `WARNING`, `FIX`, `HACK`)
-"@comment.todo           todo-type comments (e.g. `TODO`, `WIP`)
-"@comment.note           note-type comments (e.g. `NOTE`, `INFO`, `XXX`)
-"
-"@markup.strong          bold text
-"@markup.italic          italic text
-"@markup.strikethrough   struck-through text
-"@markup.underline       underlined text (only for literal underline markup!)
-"
-"@markup.heading         headings, titles (including markers)
-"@markup.heading.1       top-level heading
-"@markup.heading.2       section heading
-"@markup.heading.3       subsection heading
-"@markup.heading.4       and so on
-"@markup.heading.5       and so forth
-"@markup.heading.6       six levels ought to be enough for anybody
-"
-"@markup.quote           block quotes
-"@markup.math            math environments (e.g. `$ ... $` in LaTeX)
-"
-"@markup.link            text references, footnotes, citations, etc.
-"@markup.link.label      link, reference descriptions
-"@markup.link.url        URL-style links
-"
-"@markup.raw             literal or verbatim text (e.g. inline code)
-"@markup.raw.block       literal or verbatim text as a stand-alone block
-"
-"@markup.list            list markers
-"@markup.list.checked    checked todo-style list markers
-"@markup.list.unchecked  unchecked todo-style list markers
-"
-"@diff.plus              added text (for diff files)
-"@diff.minus             deleted text (for diff files)
-"@diff.delta             changed text (for diff files)
-"
-"@tag                    XML-style tag names (e.g. in XML, HTML, etc.)
-"@tag.builtin            builtin tag names (e.g. HTML5 tags)
-"@tag.attribute          XML-style tag attributes
-"@tag.delimiter          XML-style tag delimiters
+hi! link @variable                       Identifier              " various variable names
+hi! link @variable.builtin               BruvboxFg1Underline     " built-in variable names (e.g. `this`, `self`)
+hi! link @variable.parameter             BruvboxFg1              " parameters of a function
+hi! link @variable.parameter.builtin     BruvboxFg0Bold          " special parameters (e.g. `_`, `it`)
+hi! link @variable.member                BruvboxFg3Underline     " object and struct fields
+
+hi! link @constant                       Constant                " constant identifiers
+hi! link @constant.builtin               BruvboxPurpleSpecial    " built-in constant values
+hi! link @constant.macro                 Macro                   " constants defined by the preprocessor
+
+hi! link @module                         Include                 " modules or namespaces
+hi! link @module.builtin                 BruvboxAquaBold         " built-in modules or namespaces
+hi! link @label                          Label                   " `GOTO` and other labels (e.g. `label:` in C), including heredoc labels
+
+hi! link @string                         String                  " string literals
+hi! link @string.documentation           BruvboxGreenNeutral     " string documenting code (e.g. Python docstrings)
+hi! link @string.regexp                  BruvboxGreenSpecial     " regular expressions
+hi! link @string.escape                  BruvboxGreenBold        " escape sequences
+hi! link @string.special                 BruvboxGreenHue         " other special strings (e.g. dates)
+hi! link @string.special.symbol          BruvboxGreenBold        " symbols or atoms
+hi! link @string.special.path            BruvboxGreenSpecial     " filenames
+hi! link @string.special.url             BruvboxGreenBold        " URIs (e.g. hyperlinks)
+
+hi! link @character                      Character               " character literals
+hi! link @character.special              BruvboxPurpleBold       " special characters (e.g. wildcards)
+
+hi! link @boolean                        Boolean                 " boolean literals
+hi! link @number                         Number                  " numeric literals
+hi! link @number.float                   Float                   " floating-point number literals
+
+hi! link @type                           Type                    " type or class definitions and annotations
+hi! link @type.builtin                   BruvboxYellowSign       " built-in types
+hi! link @type.definition                Typedef                 " identifiers in type definitions (e.g. `typedef <type> <identifier>` in C)
+
+hi! link @attribute                      PreProc                 " attribute annotations (e.g. Python decorators, Rust lifetimes)
+hi! link @attribute.builtin              BruvboxAquaBold         " builtin annotations (e.g. `@property` in Python)
+hi! link @property                       BruvboxFg3Underline     " the key in key/value pairs
+
+hi! link @function                       Function                " function definitions
+hi! link @function.builtin               BruvboxOrangeBold       " built-in functions
+hi! link @function.call                  BruvboxOrange           " function calls
+hi! link @function.macro                 Macro                   " preprocessor macros
+
+hi! link @function.method                BruvboxOrangeBold       " method definitions
+hi! link @function.method.call           BruvboxOrangeHue        " method calls
+
+hi! link @constructor                    BruvboxYellowBold       " constructor calls and definitions
+hi! link @operator                       Operator                " symbolic operators (e.g. `+`, `*`)
+
+hi! link @keyword                        Keyword                 " keywords not fitting into specific categories
+hi! link @keyword.coroutine              BruvboxBlueInfo         " keywords related to coroutines (e.g. `go` in Go, `async/await` in Python)
+hi! link @keyword.function               BruvboxBlueBold         " keywords that define a function (e.g. `func` in Go, `def` in Python)
+hi! link @keyword.operator               Operator                " operators that are English words (e.g. `and`, `or`)
+hi! link @keyword.import                 Include                 " keywords for including or exporting modules (e.g. `import`, `from` in Python)
+hi! link @keyword.type                   Structure               " keywords describing namespaces and composite types (e.g. `struct`, `enum`)
+hi! link @keyword.modifier               StorageClass            " keywords modifying other constructs (e.g. `const`, `static`, `public`)
+hi! link @keyword.repeat                 Repeat                  " keywords related to loops (e.g. `for`, `while`)
+hi! link @keyword.return                 Statement               " keywords like `return` and `yield`
+hi! link @keyword.debug                  BruvboxBlueNeutral      " keywords related to debugging
+hi! link @keyword.exception              Exception               " keywords related to exceptions (e.g. `throw`, `catch`)
+
+hi! link @keyword.conditional            Conditional             " keywords related to conditionals (e.g. `if`, `else`)
+hi! link @keyword.conditional.ternary    BruvboxBlueBold         " ternary operator (e.g. `?`, `:`)
+
+hi! link @keyword.directive              PreProc                 " various preprocessor directives and shebangs
+hi! link @keyword.directive.define       Define                  " preprocessor definition directives
+
+hi! link @punctuation.delimiter          Delimiter               " delimiters (e.g. `;`, `.`, `,`)
+hi! link @punctuation.bracket            BruvboxFg3              " brackets (e.g. `()`, `{}`, `[]`)
+hi! link @punctuation.special            BruvboxOrangeSpecial    " special symbols (e.g. `{}` in string interpolation)
+
+hi! link @comment                        Comment                 " line and block comments
+hi! link @comment.documentation          BruvboxGray2            " comments documenting code
+
+hi! link @comment.error                  Error                   " error-type comments (e.g. `ERROR`, `FIXME`, `DEPRECATED`)
+hi! link @comment.warning                WarningMsg              " warning-type comments (e.g. `WARNING`, `FIX`, `HACK`)
+hi! link @comment.todo                   Todo                    " todo-type comments (e.g. `TODO`, `WIP`)
+hi! link @comment.note                   BruvboxBlueInfo         " note-type comments (e.g. `NOTE`, `INFO`, `XXX`)
+
+hi! link @markup.strong                  htmlBold                " bold text
+hi! link @markup.italic                  htmlItalic              " italic text
+hi! link @markup.strikethrough           BruvboxGray2            " struck-through text
+hi! link @markup.underline               Underlined              " underlined text (only for literal underline markup!)
+
+hi! link @markup.heading                 Title                   " headings, titles (including markers)
+hi! link @markup.heading.1               markdownH1              " top-level heading
+hi! link @markup.heading.2               markdownH2              " section heading
+hi! link @markup.heading.3               markdownH3              " subsection heading
+hi! link @markup.heading.4               markdownH4              " and so on
+hi! link @markup.heading.5               markdownH5              " and so forth
+hi! link @markup.heading.6               markdownH6              " six levels ought to be enough for anybody
+
+hi! link @markup.quote                   markdownBlockquote      " block quotes
+hi! link @markup.math                    BruvboxPurple           " math environments (e.g. `$ ... $` in LaTeX)
+
+hi! link @markup.link                    markdownLinkText        " text references, footnotes, citations, etc.
+hi! link @markup.link.label              BruvboxBlueSpecial      " link, reference descriptions
+hi! link @markup.link.url                markdownUrl             " URL-style links
+
+hi! link @markup.raw                     markdownCode            " literal or verbatim text (e.g. inline code)
+hi! link @markup.raw.block               markdownCodeBlock       " literal or verbatim text as a stand-alone block
+
+hi! link @markup.list                    markdownListMarker      " list markers
+hi! link @markup.list.checked            Todo                    " checked todo-style list markers
+hi! link @markup.list.unchecked          BruvboxGray             " unchecked todo-style list markers
+
+hi! link @diff.plus                      DiffAdd                 " added text (for diff files)
+hi! link @diff.minus                     DiffDelete              " deleted text (for diff files)
+hi! link @diff.delta                     DiffChange              " changed text (for diff files)
+
+hi! link @tag                            htmlTagName             " XML-style tag names (e.g. in XML, HTML, etc.)
+hi! link @tag.builtin                    htmlSpecialTagName      " builtin tag names (e.g. HTML5 tags)
+hi! link @tag.attribute                  htmlArg                 " XML-style tag attributes
+hi! link @tag.delimiter                  htmlTag                 " XML-style tag delimiters
 
 
 
