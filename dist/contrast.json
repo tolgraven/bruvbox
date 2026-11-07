@@ -1,0 +1,398 @@
+{
+  "dark": {
+    "aqua-solid": {
+      "foreground": "#262525",
+      "background": "#91b8a4",
+      "ratio": 6.985,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "aqua-subtle": {
+      "foreground": "#91b8a4",
+      "background": "#1c2f29",
+      "ratio": 6.449,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "blue-solid": {
+      "foreground": "#262525",
+      "background": "#7692ab",
+      "ratio": 4.71,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "blue-subtle": {
+      "foreground": "#7692ab",
+      "background": "#172533",
+      "ratio": 4.797,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "button": {
+      "foreground": "#262525",
+      "background": "#cca687",
+      "ratio": 6.822,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "button-hover": {
+      "foreground": "#262525",
+      "background": "#faecc9",
+      "ratio": 13.035,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "canvas": {
+      "foreground": "#f0e3ba",
+      "background": "#262525",
+      "ratio": 11.939,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "green-subtle": {
+      "foreground": "#b4b88d",
+      "background": "#1f281c",
+      "ratio": 7.386,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "diff-add": {
+      "foreground": "#b4b88d",
+      "background": "#1f281c",
+      "ratio": 7.386,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "diff-change": {
+      "foreground": "#7692ab",
+      "background": "#172533",
+      "ratio": 4.797,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "red-subtle": {
+      "foreground": "#d18479",
+      "background": "#281913",
+      "ratio": 5.883,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "diff-delete": {
+      "foreground": "#d18479",
+      "background": "#281913",
+      "ratio": 5.883,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "error": {
+      "foreground": "#d18479",
+      "background": "#281913",
+      "ratio": 5.883,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "green-solid": {
+      "foreground": "#262525",
+      "background": "#b4b88d",
+      "ratio": 7.411,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "info": {
+      "foreground": "#7692ab",
+      "background": "#172533",
+      "ratio": 4.797,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "muted": {
+      "foreground": "#908682",
+      "background": "#262525",
+      "ratio": 4.308,
+      "normalTextAA": false,
+      "largeTextAA": true
+    },
+    "orange-solid": {
+      "foreground": "#262525",
+      "background": "#cca687",
+      "ratio": 6.822,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "orange-subtle": {
+      "foreground": "#cca687",
+      "background": "#3c2d1f",
+      "ratio": 5.904,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "panel": {
+      "foreground": "#f0e3ba",
+      "background": "#2a292b",
+      "ratio": 11.308,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "purple-solid": {
+      "foreground": "#262525",
+      "background": "#bd979d",
+      "ratio": 5.88,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "purple-subtle": {
+      "foreground": "#bd979d",
+      "background": "#342225",
+      "ratio": 5.763,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "red-solid": {
+      "foreground": "#262525",
+      "background": "#d18479",
+      "ratio": 5.305,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "search": {
+      "foreground": "#262525",
+      "background": "#dabd7a",
+      "ratio": 8.401,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "selection": {
+      "foreground": "#faecc9",
+      "background": "#46494c",
+      "ratio": 7.726,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "success": {
+      "foreground": "#b4b88d",
+      "background": "#1f281c",
+      "ratio": 7.386,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "yellow-subtle": {
+      "foreground": "#dabd7a",
+      "background": "#2f2b19",
+      "ratio": 7.796,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "warning": {
+      "foreground": "#dabd7a",
+      "background": "#2f2b19",
+      "ratio": 7.796,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "yellow-solid": {
+      "foreground": "#262525",
+      "background": "#dabd7a",
+      "ratio": 8.401,
+      "normalTextAA": true,
+      "largeTextAA": true
+    }
+  },
+  "light": {
+    "aqua-solid": {
+      "foreground": "#faecc9",
+      "background": "#3a5853",
+      "ratio": 6.63,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "aqua-subtle": {
+      "foreground": "#3a5853",
+      "background": "#b6d1b4",
+      "ratio": 4.728,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "blue-solid": {
+      "foreground": "#faecc9",
+      "background": "#6b768b",
+      "ratio": 3.902,
+      "normalTextAA": false,
+      "largeTextAA": true
+    },
+    "blue-subtle": {
+      "foreground": "#6b768b",
+      "background": "#a6c0cd",
+      "ratio": 2.406,
+      "normalTextAA": false,
+      "largeTextAA": false
+    },
+    "button": {
+      "foreground": "#faecc9",
+      "background": "#99613c",
+      "ratio": 4.336,
+      "normalTextAA": false,
+      "largeTextAA": true
+    },
+    "button-hover": {
+      "foreground": "#faecc9",
+      "background": "#262525",
+      "ratio": 13.035,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "canvas": {
+      "foreground": "#2d3030",
+      "background": "#faecc9",
+      "ratio": 11.354,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "green-subtle": {
+      "foreground": "#79743e",
+      "background": "#ccdaa8",
+      "ratio": 3.233,
+      "normalTextAA": false,
+      "largeTextAA": true
+    },
+    "diff-add": {
+      "foreground": "#79743e",
+      "background": "#ccdaa8",
+      "ratio": 3.233,
+      "normalTextAA": false,
+      "largeTextAA": true
+    },
+    "diff-change": {
+      "foreground": "#6b768b",
+      "background": "#a6c0cd",
+      "ratio": 2.406,
+      "normalTextAA": false,
+      "largeTextAA": false
+    },
+    "red-subtle": {
+      "foreground": "#975250",
+      "background": "#ea9a98",
+      "ratio": 2.631,
+      "normalTextAA": false,
+      "largeTextAA": false
+    },
+    "diff-delete": {
+      "foreground": "#975250",
+      "background": "#ea9a98",
+      "ratio": 2.631,
+      "normalTextAA": false,
+      "largeTextAA": false
+    },
+    "error": {
+      "foreground": "#975250",
+      "background": "#ea9a98",
+      "ratio": 2.631,
+      "normalTextAA": false,
+      "largeTextAA": false
+    },
+    "green-solid": {
+      "foreground": "#faecc9",
+      "background": "#79743e",
+      "ratio": 4.088,
+      "normalTextAA": false,
+      "largeTextAA": true
+    },
+    "info": {
+      "foreground": "#6b768b",
+      "background": "#a6c0cd",
+      "ratio": 2.406,
+      "normalTextAA": false,
+      "largeTextAA": false
+    },
+    "muted": {
+      "foreground": "#605c57",
+      "background": "#faecc9",
+      "ratio": 5.656,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "orange-solid": {
+      "foreground": "#faecc9",
+      "background": "#99613c",
+      "ratio": 4.336,
+      "normalTextAA": false,
+      "largeTextAA": true
+    },
+    "orange-subtle": {
+      "foreground": "#99613c",
+      "background": "#d9a58a",
+      "ratio": 2.349,
+      "normalTextAA": false,
+      "largeTextAA": false
+    },
+    "panel": {
+      "foreground": "#2d3030",
+      "background": "#f8e8bf",
+      "ratio": 10.961,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "purple-solid": {
+      "foreground": "#faecc9",
+      "background": "#7f6f7f",
+      "ratio": 3.995,
+      "normalTextAA": false,
+      "largeTextAA": true
+    },
+    "purple-subtle": {
+      "foreground": "#7f6f7f",
+      "background": "#d9b7b7",
+      "ratio": 2.545,
+      "normalTextAA": false,
+      "largeTextAA": false
+    },
+    "red-solid": {
+      "foreground": "#faecc9",
+      "background": "#975250",
+      "ratio": 4.921,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "search": {
+      "foreground": "#faecc9",
+      "background": "#957644",
+      "ratio": 3.615,
+      "normalTextAA": false,
+      "largeTextAA": true
+    },
+    "selection": {
+      "foreground": "#262525",
+      "background": "#d5c4a1",
+      "ratio": 8.91,
+      "normalTextAA": true,
+      "largeTextAA": true
+    },
+    "success": {
+      "foreground": "#79743e",
+      "background": "#ccdaa8",
+      "ratio": 3.233,
+      "normalTextAA": false,
+      "largeTextAA": true
+    },
+    "yellow-subtle": {
+      "foreground": "#957644",
+      "background": "#d9c894",
+      "ratio": 2.552,
+      "normalTextAA": false,
+      "largeTextAA": false
+    },
+    "warning": {
+      "foreground": "#957644",
+      "background": "#d9c894",
+      "ratio": 2.552,
+      "normalTextAA": false,
+      "largeTextAA": false
+    },
+    "yellow-solid": {
+      "foreground": "#faecc9",
+      "background": "#957644",
+      "ratio": 3.615,
+      "normalTextAA": false,
+      "largeTextAA": true
+    }
+  }
+}

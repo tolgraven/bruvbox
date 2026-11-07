@@ -1,0 +1,28 @@
+# Generated from Bruvbox tokens. Do not edit.
+[colors.primary]
+background = "#faecc9"
+foreground = "#2d3030"
+[colors.cursor]
+cursor = "#2d3030"
+text = "#faecc9"
+[colors.selection]
+background = "#d5c4a1"
+text = "#262525"
+[colors.normal]
+black = "#faecc9"
+red = "#d76b69"
+green = "#91855a"
+yellow = "#d9a961"
+blue = "#458588"
+magenta = "#a38392"
+cyan = "#70907a"
+white = "#7a6f69"
+[colors.bright]
+black = "#908682"
+red = "#975250"
+green = "#79743e"
+yellow = "#957644"
+blue = "#6b768b"
+magenta = "#7f6f7f"
+cyan = "#3a5853"
+white = "#3a393d"

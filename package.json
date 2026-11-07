@@ -1,0 +1,24 @@
+{
+  "name": "@tolgraven/bruvbox",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Portable Bruvbox tokens, combinations and generated themes",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/theme.mjs"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check",
+    "test": "node --test",
+    "contrast": "node scripts/build.mjs --contrast"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "ajv": "8.17.1",
+    "sass": "1.93.2"
+  }
+}

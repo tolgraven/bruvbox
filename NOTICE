@@ -1,0 +1,10 @@
+Bruvbox is derived from Gruvbox by morhetz <morhetz@gmail.com>.
+Bruvbox modifications by Joen Tolgraven (@tolgraven).
+
+The inherited Bruvbox and upstream Gruvbox READMEs declare MIT/X11 licensing.
+The original attribution in colors/bruvbox.vim and the legacy README is retained.
+Palette extraction was made from Bruvbox revision:
+dd115f1133ce40f83711584fad51d83796de6898
+
+New compiler, schema, generated adapters and documentation: Copyright (c) 2026
+Joen Tolgraven, released under the MIT license in LICENSE.
