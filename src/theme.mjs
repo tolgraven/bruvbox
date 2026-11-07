@@ -110,10 +110,13 @@ export function resolveCombinations(definitions, colors) {
       assert(typeof spec[style] === 'boolean', `${name}: ${style} must be boolean`);
       out[style] = spec[style];
     }
-    out.contrast = contrast(out.foreground, out.background);
+    const rawContrast = contrast(out.foreground, out.background);
+    // Math.pow may differ in its last bits between V8 releases/architectures.
+    // Serialize a stable precision, but enforce requirements on the raw ratio.
+    out.contrast = Number(rawContrast.toFixed(6));
     if (spec.minContrast !== undefined) {
       assert(typeof spec.minContrast === 'number' && Number.isFinite(spec.minContrast) && spec.minContrast >= 1 && spec.minContrast <= 21, `${name}: invalid minimum contrast`);
-      assert(out.contrast >= spec.minContrast, `${name}: contrast ${out.contrast.toFixed(2)} is below ${spec.minContrast}`);
+      assert(rawContrast >= spec.minContrast, `${name}: contrast ${out.contrast.toFixed(2)} is below ${spec.minContrast}`);
       out.minContrast = spec.minContrast;
     }
     references[name] = spec;

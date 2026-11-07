@@ -47,6 +47,6 @@ A new adapter consumes `loadTheme()` and uses resolved `colors` and `combination
 
 ## Contrast
 
-Contrast uses WCAG relative luminance on the resolved opaque sRGB colors. It does not assess borders, non-text graphics, font size, antialiasing, transparent composition, or an entire UI. `normalTextAA` means ratio ≥ 4.5; `largeTextAA` means ratio ≥ 3. These labels are numeric checks, not universal accessibility certification. Ratios are reported unmodified; only an explicit `minContrast` requirement blocks a build.
+Contrast uses WCAG relative luminance on the resolved opaque sRGB colors. It does not assess borders, non-text graphics, font size, antialiasing, transparent composition, or an entire UI. `normalTextAA` means ratio ≥ 4.5; `largeTextAA` means ratio ≥ 3. These labels are numeric checks, not universal accessibility certification. Resolved ratios are serialized to six decimal places for reproducibility across JavaScript engines (the compact report uses three); requirements are checked against the unrounded calculation. Only an explicit `minContrast` requirement blocks a build.
 
 The default canvas requires 4.5 in both variants. The preserved dark muted pair is about 4.31. Several inherited light colored combinations fall below 4.5; see `dist/contrast.json` before choosing them for body text. A future accessible variant can point roles at alternative palette entries without altering the legacy variant.
