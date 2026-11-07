@@ -1,0 +1,23 @@
+# Generated from Bruvbox tokens. Do not edit.
+background = #262525
+foreground = #f0e3ba
+cursor-color = #f0e3ba
+cursor-text = #262525
+selection-background = #46494c
+selection-foreground = #faecc9
+palette = 0=#262525
+palette = 1=#d76b69
+palette = 2=#91855a
+palette = 3=#d9a961
+palette = 4=#458588
+palette = 5=#a38392
+palette = 6=#70907a
+palette = 7=#a89984
+palette = 8=#908682
+palette = 9=#d18479
+palette = 10=#b4b88d
+palette = 11=#dabd7a
+palette = 12=#7692ab
+palette = 13=#bd979d
+palette = 14=#91b8a4
+palette = 15=#ebdbb2

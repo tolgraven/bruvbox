@@ -1,0 +1,18 @@
+{
+  "base00": "surface.canvas",
+  "base01": "surface.raised",
+  "base02": "surface.selection",
+  "base03": "text.muted",
+  "base04": "text.secondary",
+  "base05": "text.primary",
+  "base06": "text.strong",
+  "base07": "syntax.operator",
+  "base08": "accent.red",
+  "base09": "accent.orange",
+  "base0A": "accent.yellow",
+  "base0B": "accent.green",
+  "base0C": "accent.aqua",
+  "base0D": "accent.blue",
+  "base0E": "accent.purple",
+  "base0F": "palette.faded-orange"
+}

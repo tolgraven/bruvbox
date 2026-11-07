@@ -1,188 +1,127 @@
-**STILL VERY WIP**
+# Bruvbox
 
-Despite what you may think, Bruvbox is heavily inspired by - and in fact,
-forked from - [Gruvbox][].
-Turns out the Gruvbox I love ain't the original, but a massively
-desaturated version courtesy of perma-cranked iTerm minimum contrast. With
-the entire web similarly washed out (an aside of the excellent
-[Deluminate][] inversion extension) I never noticed. Apart from that,
-needs more blue.
+Faded blues, moss greens, warm neutrals. One source for colors **and combinations**, with web, Neovim and terminal adapters.
 
-Same retro feel, partly overlapping hues, but that red-yellow-orange dominance
-flipped towards shades of blue, moss green, red, and bleached yellow and green.
-Truecolor gets properly leveraged through a six-shade palette for each
-color, rounded out with 20 shades of gray.
-Such overkill wankery lets every color type be appropriately used no matter 
-the background luminance:
-Very faint text background let diffs retain original syntax highlight while
-still clearly differentiating + and -, makes it easy to spot the exact column
-of that linter error, even in a terminal, without looking like shit. 
-And subtly raising the background of important syntax keywords makes them stand
-out without compromising the foreground or resorting to loud colors.
+Bruvbox started as Joen Tolgraven's heavily modified Gruvbox fork. The original 79 active colors are preserved exactly. The canonical definitions now live in JSON rather than Vimscript.
 
+| Source | Responsibility |
+| --- | --- |
+| `tokens/palette.tokens.json` | Literal colors; original names and cterm metadata |
+| `tokens/dark.tokens.json`, `tokens/light.tokens.json` | Semantic aliases: surfaces, text, accents, tints, syntax and terminal slots |
+| `theme.json` | Variant composition and 28 reusable foreground/background combinations |
+| `adapters/` | Target-specific mappings, with no literal colors |
+| `src/theme.mjs` | Validation, alias resolution, combination inheritance, contrast and JS API |
+| `src/render.mjs` | Output formats |
 
-* Multiple levels of "non-active" area background, giving a rare glue and
-	coherency for non-buffer elements without losing separation from the actual
-	buffer.
-	
+Colors use the [DTCG 2025.10](https://www.designtokens.org/tr/2025.10/format/) format. The compiler intentionally supports a **documented subset**: opaque sRGB colors, groups and whole-token aliases. It is not a complete DTCG resolver. Combinations use a separate, versioned, application-independent schema; exported DTCG files expose their color channels as ordinary color tokens.
 
-Ordinary syntax also makes heavy use of subtle color and style variations to
-differentiate grouped syntax items, such as conditionals and loops.
+## Use the outputs
 
-This means clarity can be retained, or even furthered, even though the colors
-are nicely faded and contrast low.
+Everything in `dist/` is committed. Consumers need no npm installation or build step.
 
+- `dist/web/bruvbox.css`: CSS custom properties, dark by default; switch with `data-bruvbox="light"` or `"dark"` on a root/container.
+- `dist/web/_bruvbox.scss`: Sass variables, variant maps, lookup functions and combination mixin.
+- `dist/json/`: fully resolved colors and combinations, including contrast ratios.
+- `dist/dtcg/`: self-contained portable token documents.
+- `dist/clojure/bruvbox/theme.cljc`: CLJ/CLJS palette maps matching tolgrAVen's Highlight.js palette keys.
+- `dist/{kitty,ghostty,alacritty,iterm}/`: dark/light truecolor terminal presets.
+- `dist/base16/`: explicitly lossy Base16 projections for Tinted Theming.
+- `dist/preview.html`: standalone palette/combination catalogue; open it in a browser.
+- `dist/contrast.json`: measured foreground/background contrast for every combination.
 
+### Web / submodule
 
-For the full experience out of the box, you will need
---------------
-* A terminal (and Vim) setup allowing 24 bit color
-* DevIcons (including powerline, etc)
-* Airline
-* that fade inactive pane plug
+```fish
+git submodule add https://github.com/tolgraven/bruvbox.git vendor/bruvbox
+```
 
-Recommended:
---------------
-* [NeoVim][]
-* [Fira Code][] or similar ligature-supporting font
-* No, or just a hint of, transparency. Heavy transparency will probably work
-	better with a higher-contrast theme than this one...
-* Enabling the full theme including symbols and glyphs.
-* If using iTerm or other terminal with similar features, go easy on the 
-	"minimum contrast" and "cursor guide" options.  If you're like me and can't 
-	live without them in your shell, wrap your vim invocation in a profile switch
-* NERDTree, Startify
-* [tmux][]
+Commit `.gitmodules` and the submodule pointer. CI checks out submodules recursively. Pin updates to a reviewed commit; do not use `git submodule update --remote` implicitly during builds.
 
+Load `dist/web/bruvbox.css` through your CSS pipeline, then:
 
-* line numbers auto change color
-* Focus on maintaining look across languages
+```scss
+@use "vendor/bruvbox/dist/web/bruvbox" as bb;
 
-The code is also modified, and there are _many_ new features and customizations available - much more is exposed through variables.
+.card {
+  @include bb.combination("panel"); // Runtime CSS variables; follows dark/light.
+  border-width: 1px;
+  border-style: solid;
+}
+.notice { @include bb.combination("warning"); }
+.brand { color: bb.$bruvbox-accent-orange; } // Literal dark color.
+.light-only { color: bb.color("accent.orange", "light"); }
+.link { color: bb.css-color("accent.blue"); } // Runtime var(...).
+```
 
-Little attention has been paid to the light variant as of yet.
+`@use` resolves relative to the importing file or configured Sass load paths; add the repository root as a load path for the example above. The Sass module does not emit CSS variables itself. Import the CSS once through the owning bundle, or copy it as a stylesheet. See [the tolgrAVen integration recipe](docs/tolgraven.md) for its existing build and CLJS theme.
 
-   [gruvbox]: https://github.com/morhetz/gruvbox
-	 [Deluminate]: https://github.com/abstiles/deluminate
+### JavaScript
 
-Attention
----------
+```js
+import {loadTheme, getColor, getCombination} from './vendor/bruvbox/src/theme.mjs';
+const theme = await loadTheme(); // Node build-time API; resolves relative to module.
+getColor(theme, 'accent.orange');
+getCombination(theme, 'error', 'dark'); // {foreground, background, border, contrast}
+```
 
-1. [Read this first](https://github.com/morhetz/gruvbox/wiki/Terminal-specific)
+For the browser, import/fetch `dist/json/bruvbox-dark.json`; the compiler uses Node filesystem APIs and should stay out of client bundles.
 
-Screenshots
------------
+### Neovim
 
-Yes, fix
+Install this repository as a plugin. Requires Neovim 0.11+; runtime has no npm, Lua plugin or color-library dependency.
 
-### Dark mode
+```lua
+-- lazy.nvim
+{
+  'tolgraven/bruvbox',
+  lazy = false,
+  priority = 1000,
+  config = function()
+    require('bruvbox').setup({ variant = 'auto', italic = true })
+    vim.cmd.colorscheme('bruvbox-next')
+  end,
+}
+```
 
-Beest
+`auto` follows `background`; explicit `dark`/`light`, `transparent`, and `overrides` are supported. `overrides` is a highlight map or `function(theme) return {...} end`; entries replace whole highlight definitions. Read colors via `require('bruvbox').get().colors['accent.orange']` and combinations via `.combinations.error`.
 
-### Light mode
+The new adapter covers core UI, syntax, Tree-sitter, LSP semantic tokens, diagnostics, GitSigns and Telescope, with small explicit Clojure mappings. It is a structured replacement, **not pixel-identical parity with every legacy language/plugin customization**. Existing `colorscheme bruvbox` remains the Vimscript theme, using the same generated palette. Original documentation lives in [docs/legacy-vim.md](docs/legacy-vim.md). Its glyphs/Airline behavior and legacy options are not transplanted into the new adapter.
 
-Shitty
+### Terminals on macOS
 
-### Airline theme
+- **Kitty:** `include /absolute/path/to/bruvbox/dist/kitty/bruvbox-dark.conf` in `kitty.conf`.
+- **Ghostty:** `config-file = /absolute/path/to/bruvbox/dist/ghostty/bruvbox-dark` in its config.
+- **Alacritty:** add the generated TOML path to `[general].import`.
+- **iTerm2:** `open /absolute/path/to/bruvbox/dist/iterm/bruvbox-dark.itermcolors`, then choose the imported preset in profile colors.
 
-Yes
+Presets define 16 RGB ANSI slots, foreground/background, cursor and selection. They do not remap every 256-color slot or affect applications emitting their own RGB values. Palette files are structurally tested; native terminal import/rendering still needs a check on your Mac.
 
-Palette
--------
+## Edit and build
 
-### Dark mode
+Node 22+. Generation itself has **zero package dependencies**:
 
-![Palette Dark]()
+```fish
+node scripts/build.mjs
+node scripts/build.mjs --check
+node scripts/build.mjs --contrast
+node scripts/build.mjs --out /path/to/export-root
+```
 
-### Light mode
+Custom output preserves the `dist/`, `lua/` and `autoload/` directory layout. Build/check paths are independent of cwd. Build fails on invalid references, alias/combination cycles, unsupported color features, output name collisions and declared contrast violations. `--check` also detects missing, changed and obsolete artifacts.
 
-![Palette Light]()
+For development checks:
 
+```fish
+npm ci
+npm test
+npm run check
+nvim --headless -u NONE --cmd 'set rtp+=.' -l test/nvim.lua
+```
 
-Contrast options
-----------------
+Change tokens/aliases/combinations, regenerate, review the catalogue and contrast report, then commit sources and outputs together. The light variant is a new semantic mapping over the inherited light palette; it is not a claim of established visual parity. Some combinations intentionally remain below WCAG AA normal-text contrast. `minContrast` can enforce a requirement per combination without silently recoloring the palette.
 
-One of the things dropped for now, might return. Plan is a full scale instead of discrete steps.
+See [schema and extension guide](docs/schema.md), [research and design decisions](docs/research.md), and [migration/integration](docs/tolgraven.md).
 
-Documentation
--------------
+## Attribution
 
-
-Features
---------
-
-* Looks fine as hell
-* Most existing Gruvbox options and customizations
-* Lots of further options, all with thought-out defaults predefined
-* Airline theme much extended
-* Palette totals 6 shades of each color, and 16 dark/gray shades. All are fully
-	exported not just as predifined highlight groups, but individually as well,
-	so that extending functionality or making minor tweaks doesn¨t require
-	digging into the code or looking up hex codes.
-* Code is much more dense and (imo) easy to get an overview of
-
-* Also available (or soon to be) for [tmux][] and [Fish shell][], as approximate 256color versions for [ranger][], [highlight][],
-and (basic variant) as terminal colors for [iTerm2][]
-		Fix when finished: grc, 
-
-* Extended filetype highlighting: Html, Xml, Vim (and ES6 with [yajs.vim](https://github.com/othree/yajs.vim)), Clojure, C, Python, JavaScript, CoffeeScript, Ruby, Objective-C, Go, Lua, MoonScript, Java, Markdown, Haskell
-* Supported plugins, from Gruvbox: [EasyMotion][], [vim-sneak][], [Indent Guides][], [indentLine][], [Rainbow Parentheses][], [Airline][], [Lightline][], [GitGutter][], [Signify][], [ShowMarks][], [Signature][], [Syntastic][], [CtrlP][], [Startify][]
-* New: [Lista][], [Metabuffer][], [ALE][], [Undotree][], [HighlightYankedregion][], [NERDTree][]
-* Improved: GitGutter, vim-sneak, EasyMotion
-
-
-   [EasyMotion]: https://github.com/Lokaltog/vim-easymotion
-   [vim-sneak]: https://github.com/justinmk/vim-sneak
-   [Indent Guides]: https://github.com/nathanaelkane/vim-indent-guides
-   [indentLine]: https://github.com/Yggdroot/indentLine
-   [Rainbow Parentheses]: https://github.com/kien/rainbow_parentheses.vim
-   [Airline]: https://github.com/bling/vim-airline
-   [Lightline]: https://github.com/itchyny/lightline.vim
-   [GitGutter]: https://github.com/airblade/vim-gitgutter
-   [Signify]: https://github.com/mhinz/vim-signify
-   [ShowMarks]: http://www.vim.org/scripts/script.php?script_id=152
-   [Signature]: https://github.com/kshenoy/vim-signature
-   [Syntastic]: https://github.com/scrooloose/syntastic
-   [CtrlP]: https://github.com/kien/ctrlp.vim
-   [Startify]: https://github.com/mhinz/vim-startify
-
-
-Known shortcomings
--------------
-Vim-related:
-* CursorLine gets overruled by IndentGuides, which (I find) actually makes
-	things easier to see, but breaks the coherent look a bit. 
-	In the same vein, underlined CursorLine (in insert mode) does not get cut off
-	by ColorColumn, and is shown in all windows, not just the active one. 
-	That is of course true for the CursorLine in general, but the background 
-	dimming hides it nicely.
-* Search text fg, in 'inactive' areas (other windows, past ColorColumn etc)
-	is black instead of white, ie hard to read on a default dark blue bg.
-	Gives a rather nice effect, and usually not an issue, but not ideal when one
-	has multiple search matches.
-
-
-Contributions
--------------
-
-Welcome
-
-ToDo
-----
-* Clean up enough for others to use
-* Complete readme
-
-
-* HIGH++ contrast mode for dark mode outdoors
-
-* More plugs - SemanticHighlight, proper for Rainbow, NERDTree git plugin, DevIcons (first just Coldevicons palette then properly?)
-General helper plug doing all the little things a colorscheme really really oughtn't get involved with,
-but that's still needed for the proper "skin" experience. Like: implement the auto ColorColumn-based fade instead of relying on external plug...
-
-
-
-License
--------
-[MIT/X11][]
-
-   [MIT/X11]: https://en.wikipedia.org/wiki/MIT_License
+Bruvbox by Joen Tolgraven; derived from [Gruvbox by morhetz](https://github.com/morhetz/gruvbox). The original project declares MIT/X11 licensing. See [NOTICE](NOTICE) and the preserved [legacy README](docs/legacy-vim.md#license). New compiler and adapter code is MIT licensed.
